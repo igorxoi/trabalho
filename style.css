@@ -76,7 +76,7 @@ body {
 
 .menu li:hover,
 .item-menu.active {
-  color: var(--cor-primaria) !important;
+  color: var(--cor-primaria);
   font-weight: 600;
   background-color: var(--cor-secundaria);
 }
