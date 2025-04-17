@@ -109,7 +109,7 @@ a {
 }
 
 /* MAIN */
-.main--content {
+.main--container {
   position: relative;
   background: #f0f1ec;
   width: 100%;
@@ -120,7 +120,7 @@ a {
   flex-direction: column;
 }
 
-.header--wrapper {
+.header--conteudo {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -132,16 +132,16 @@ a {
   height: 95px;
 }
 
-.header--title {
+.header--titulo {
   color: var(--cor-texto-primario);
 }
 
-.header--title span {
+.header--titulo span {
   font-size: 14px;
   color: var(--cor-cinza);
 }
 
-.card--content {
+.card--container {
   background-color: var(--cor-branco);
   padding: 2rem;
   border-radius: 10px;

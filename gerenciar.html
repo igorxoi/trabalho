@@ -56,14 +56,14 @@
         </li>
       </ul>
     </nav>
-    <main class="main--content">
-      <header class="header--wrapper">
-        <div class="header--title">
+    <main class="main--container">
+      <header class="header--conteudo">
+        <div class="header--titulo">
           <h1>Gerenciar Estacionamento</h1>
-          <span class="header--subtitle"></span>
+          <span class="header--subtitulo"></span>
         </div>
       </header>
-      <div class="card--content">
+      <div class="card--container">
         
       </div>
     </main>
@@ -104,12 +104,12 @@
 
       const resultado = `${dataFormatada} ${horaFormatada}`;
 
-      document.querySelector(".header--subtitle").textContent = resultado;
+      document.querySelector(".header--subtitulo").textContent = resultado;
     }
 
     const sidebar = document.querySelector(".sidebar");
     const menuItem = document.querySelectorAll(".menu li span");
-    const subtitle = document.querySelectorAll(".header--subtitle");
+    const subtitle = document.querySelectorAll(".header--subtitulo");
 
     const iconeMenu = document.querySelector(".icon-menu");
 
