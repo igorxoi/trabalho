@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=.sliderbar, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+    />
+    <title>Parkcontrol - Gerenciar Estacionamento</title>
+  </head>
+  <body>
+    <nav class="sidebar">
+      <div class="logo">
+        <img src="" alt="Logo" />
+      </div>
+      <ul class="menu">
+        <a href="#">
+          <li class="item-menu">
+            <i class="material-symbols-outlined">dashboard</i>
+            <span>Dashboard</span>
+          </li>
+        </a>
+        <a href="#">
+          <li class="item-menu">
+            <i class="material-symbols-outlined">add</i>
+            <span> Cadastro de Veículo</span>
+          </li>
+        </a>
+        <a href="#">
+          <li class="item-menu active">
+            <i class="material-symbols-outlined">car_gear</i>
+            <span>Gerenciar Estacionamento</span>
+          </li>
+        </a>
+        <a href="#" >
+          <li class="item-menu">
+            <i class="material-symbols-outlined">lists</i>
+            <span>Histórico</span>
+          </li>
+        </a>
+        <a href="#">
+          <li class="item-menu">
+            <i class="material-symbols-outlined">settings</i>
+            <span>Configurações</span>
+          </li>
+        </a>
+        <li class="logout" onclick="expandirMenu()">
+          <i class="material-symbols-outlined icon-menu"> arrow_menu_open </i>
+          <span>Recolher</span>
+        </li>
+      </ul>
+    </nav>
+    <main class="main--content">
+      <header class="header--wrapper">
+        <div class="header--title">
+          <h1>Gerenciar Estacionamento</h1>
+          <span class="header--subtitle"></span>
+        </div>
+      </header>
+      <div class="card--content">
+        
+      </div>
+    </main>
+  </body>
+  <script>
+    function getData(isAbreviado) {
+      const data = new Date();
+      let horaFormatada = "";
+      const opcoesExtenso = {
+        weekday: "long",
+        day: "numeric",
+        month: "long",
+        year: "numeric",
+      };
+      const opcoesAbreviado = {
+        weekday: "short",
+        day: "numeric",
+        month: "short",
+        year: "numeric",
+      };
+
+      let dataFormatada = data.toLocaleDateString(
+        "pt-BR",
+        isAbreviado ? opcoesAbreviado : opcoesExtenso
+      );
+
+      if (isAbreviado) {
+        dataFormatada = dataFormatada
+          .replace(/\./g, "")
+          .replace(/\sde\s/g, " ");
+
+        horaFormatada = data.toLocaleTimeString("pt-BR", {
+          hour: "2-digit",
+          minute: "2-digit",
+          hour12: false,
+        });
+      }
+
+      const resultado = `${dataFormatada} ${horaFormatada}`;
+
+      document.querySelector(".header--subtitle").textContent = resultado;
+    }
+
+    const sidebar = document.querySelector(".sidebar");
+    const menuItem = document.querySelectorAll(".menu li span");
+    const subtitle = document.querySelectorAll(".header--subtitle");
+
+    const iconeMenu = document.querySelector(".icon-menu");
+
+    function setDisplay(elements, displayStyle) {
+      elements.forEach((item) => {
+        item.style.display = displayStyle;
+      });
+    }
+
+    function expandirMenu() {
+      const isExpanded = sidebar.classList.contains("sidebar--active");
+
+      sidebar.classList.toggle("sidebar--active");
+      iconeMenu.textContent = isExpanded
+        ? "arrow_menu_open"
+        : "arrow_menu_close";
+
+      setDisplay(menuItem, isExpanded ? "none" : "block");
+    }
+
+    getData(false);
+  </script>
+</html>
