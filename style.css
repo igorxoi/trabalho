@@ -136,7 +136,8 @@ a {
   color: var(--cor-texto-primario);
 }
 
-.header--titulo span, .configuracoes--container form span {
+.header--titulo span,
+.configuracoes--container form span {
   font-size: 14px;
   color: var(--cor-cinza);
 }
@@ -172,7 +173,7 @@ a {
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-.veiculo-info {
+.veiculo-info, .item-dashbord {
   display: grid;
   grid-template-columns: auto 1fr;
   gap: 8px;
@@ -192,7 +193,7 @@ a {
   font-size: 32px;
 }
 
-.detalhes-veiculo {
+.detalhes-veiculo, .item-dashbord .detalhes {
   display: grid;
   gap: 4px;
 }
@@ -236,7 +237,7 @@ a {
   font-weight: 600;
 }
 
-.mais-detalhes {
+.mais-detalhes, .item-dashbord .descricao {
   color: #acacac;
   font-size: 12px;
   display: grid;
@@ -418,11 +419,24 @@ input:disabled ~ label {
 
 /* CONFIGURACAO */
 .configuracoes--container .grupo-input {
-  padding: .5rem 0 1rem
+  padding: 0.5rem 0 1rem;
 }
 
 .configuracoes--container h2 {
   margin-bottom: 1rem;
+}
+
+/* RESUMO */
+.item-dashbord .icone {
+  border-radius: 50%;
+  background-color: var(--cor-primaria);
+  color: var(--cor-branco);
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  margin-right: 0.8rem;
+  justify-content: center;
+  font-size: 16px;
 }
 
 @media (max-width: 680px) {
