@@ -38,7 +38,7 @@ body {
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
 }
 
-.sidebar--active {
+.sidebar--ativo {
   width: 400px;
   transition: 0.5s;
   display: block;
@@ -75,7 +75,7 @@ body {
 }
 
 .menu li:hover,
-.item-menu.active {
+.item-menu.ativo {
   color: var(--cor-primaria);
   font-weight: 600;
   background-color: var(--cor-secundaria);
@@ -136,7 +136,7 @@ a {
   color: var(--cor-texto-primario);
 }
 
-.header--titulo span {
+.header--titulo span, .configuracoes--container form span {
   font-size: 14px;
   color: var(--cor-cinza);
 }
@@ -255,7 +255,8 @@ hr {
   gap: 8px;
 }
 
-button {
+button,
+input[type="submit"] {
   width: 100%;
   border: 0;
   padding: 8px 16px;
@@ -315,6 +316,115 @@ tr:hover {
   background: #f9f9f9;
 }
 
+/* CADSATRO */
+.selecao-tipo-veiculo {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  max-width: 900px;
+  gap: 24px;
+  padding: 1rem 0;
+}
+
+.opcao-tipo-veiculo {
+  border-radius: 8px;
+  background: var(--cor-branco);
+  padding: 24px;
+  display: grid;
+  gap: 16px;
+  width: 100%;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}
+
+.opcao-tipo-veiculo.ativo {
+  border: 1px solid var(--cor-secundaria);
+  box-shadow: none;
+  color: var(--cor-primaria);
+}
+
+.opcao-tipo-veiculo.ativo span {
+  font-weight: 600;
+  color: var(--cor-primaria);
+}
+
+.opcao-tipo-veiculo span {
+  font-size: 14px;
+  color: var(--cor-cinza);
+}
+
+.grupo-input {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 440px));
+  gap: 20px;
+  padding: 1rem 0;
+  max-width: 900px;
+}
+
+.acoes-cadastrar-veiculo {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 210px));
+  gap: 20px;
+  padding: 2.5rem 0;
+  place-content: end;
+  max-width: 900px;
+}
+
+.acoes-cadastrar-veiculo button,
+.acoes-cadastrar-veiculo input {
+  height: 45px;
+}
+
+.acoes-cadastrar-veiculo input {
+  background: var(--cor-primaria);
+  color: var(--cor-branco);
+}
+
+.input-formulario {
+  position: relative;
+}
+
+.input-formulario input {
+  width: 100%;
+  height: 45px;
+  border-radius: 6px;
+  font-size: 14px;
+  padding: 0 10px;
+  border: 1px solid var(--cor-cinza);
+  background: transparent;
+  color: var(--cor-cinza);
+  outline: none;
+}
+
+.input-formulario label {
+  position: absolute;
+  top: 50%;
+  left: 15px;
+  transform: translateY(-50%);
+  color: var(--cor-cinza);
+  font-size: 14px;
+  pointer-events: none;
+  transition: 0.3s;
+}
+
+input:focus ~ label,
+input:valid ~ label,
+input:disabled ~ label {
+  top: 0;
+  left: 15px;
+  font-size: 12px;
+  padding: 0 2px;
+  background: var(--cor-branco);
+}
+
+/* CONFIGURACAO */
+.configuracoes--container .grupo-input {
+  padding: .5rem 0 1rem
+}
+
+.configuracoes--container h2 {
+  margin-bottom: 1rem;
+}
+
 @media (max-width: 680px) {
   .header--conteudo {
     height: auto;
@@ -329,7 +439,7 @@ tr:hover {
     padding: 0;
   }
 
-  .input-container {
+  .grupo-input {
     grid-template-columns: 1fr;
   }
 }
