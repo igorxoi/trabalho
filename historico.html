@@ -12,7 +12,7 @@
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
     />
-    <title>Parkcontrol - Histórico</title>
+    <title>Histórico</title>
   </head>
   <body>
     <nav class="sidebar">
@@ -39,7 +39,7 @@
           </li>
         </a>
         <a href="historico.html">
-          <li class="item-menu">
+          <li class="item-menu active">
             <i class="material-symbols-outlined">lists</i>
             <span>Histórico</span>
           </li>
@@ -64,83 +64,82 @@
         </div>
       </header>
       <div class="table--container">
-        <div class="table--conteudo">
-          <table>
-            <thead>
-              <tr>
-                <th>Vaga</th>
-                <th>Condutor</th>
-                <th>Veículo</th>
-                <th>Data</th>
-                <th>Hora</th>
-                <th>Tempo Estacionado</th>
-                <th>Valor Estimado</th>
-                <th>Status</th>
-                <th>Ações</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>A3</td>
-                <td>Igor Xavier</td>
-                <td>Honda / ADC2021</td>
-                <td>12 Jul 2025</td>
-                <td>18h30</td>
-                <td>2h 30m</td>
-                <td>R$ 25,00</td>
-                <td>
-                  <span class="status estacionado">
-                    <span class="material-symbols-outlined">timer</span>
-                    Estacionado
-                  </span>
-                </td>
-                <td>
-                  <!-- <button class="detalhes">Ver Detalhes</button>
+        <table>
+          <thead>
+            <tr>
+              <th>Vaga</th>
+              <th>Condutor</th>
+              <th>Veículo</th>
+              <th>Data</th>
+              <th>Hora</th>
+              <th>Tempo Estacionado</th>
+              <th>Valor Estimado</th>
+              <th>Status</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>A3</td>
+              <td>Igor Xavier</td>
+              <td>Honda / ADC2021</td>
+              <td>12 Jul 2025</td>
+              <td>18h30</td>
+              <td>2h 30m</td>
+              <td>R$ 25,00</td>
+              <td>
+                <span class="status estacionado">
+                  <span class="material-symbols-outlined">timer</span>
+                  Estacionado
+                </span>
+              </td>
+              <td>
+                <!-- <button class="detalhes">Ver Detalhes</button>
                   <button class="baixa">Dar baixa</button> -->
-                </td>
-              </tr>
-              <tr>
-                <td>A3</td>
-                <td>Igor Xavier</td>
-                <td>Honda / ADC2021</td>
-                <td>12 Jul 2025</td>
-                <td>18h30</td>
-                <td>2h 30m</td>
-                <td>R$ 25,00</td>
-                <td>
-                  <span class="status liberado">
-                    <span class="material-symbols-outlined">flag</span>
+              </td>
+            </tr>
+            <tr>
+              <td>A3</td>
+              <td>Igor Xavier</td>
+              <td>Honda / ADC2021</td>
+              <td>12 Jul 2025</td>
+              <td>18h30</td>
+              <td>2h 30m</td>
+              <td>R$ 25,00</td>
+              <td>
+                <span class="status liberado">
+                  <span class="material-symbols-outlined">flag</span>
 
-                    Pronto para saída
-                  </span>
-                </td>
-                <td>
-                  <!-- <button class="detalhes">Ver Detalhes</button>
+                  Pronto para saída
+                </span>
+              </td>
+              <td>
+                <!-- <button class="detalhes">Ver Detalhes</button>
                   <button class="baixa">Dar baixa</button> -->
-                </td>
-              </tr>
-              <tr>
-                <td>A3</td>
-                <td>Igor Xavier</td>
-                <td>Honda / ADC2021</td>
-                <td>12 Jul 2025</td>
-                <td>18h30</td>
-                <td>2h 30m</td>
-                <td>R$ 25,00</td>
-                <td>
-                  <span class="status baixa">
-                    <span class="material-symbols-outlined">done_all</span>
-                    Baixa realizada
-                  </span>
-                </td>
-                <td>
-                  <!-- <button class="detalhes">Ver Detalhes</button> -->
-                </td>
-              </tr>
-            </tbody>
-          </table>
+              </td>
+            </tr>
+            <tr>
+              <td>A3</td>
+              <td>Igor Xavier</td>
+              <td>Honda / ADC2021</td>
+              <td>12 Jul 2025</td>
+              <td>18h30</td>
+              <td>2h 30m</td>
+              <td>R$ 25,00</td>
+              <td>
+                <span class="status baixa">
+                  <span class="material-symbols-outlined">done_all</span>
+                  Baixa realizada
+                </span>
+              </td>
+              <td>
+                <!-- <button class="detalhes">Ver Detalhes</button> -->
+              </td>
+            </tr>
+          </tbody>
+        </table>
 
-          <!-- <div class="pagination--content">
+        <!-- <div class="pagination--content">
             <div class="pagination">
               <button onclick="paginaAnterior()">Anterior</button>
               <span class="page-info active">1</span>
@@ -150,7 +149,6 @@
               <button onclick="proximaPagina()">Próximo</button>
             </div>
           </div> -->
-        </div>
       </div>
     </main>
   </body>

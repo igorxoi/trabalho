@@ -141,7 +141,11 @@ a {
   color: var(--cor-cinza);
 }
 
-.card--container, .table--container {
+.card--container,
+.table--container,
+.cadastro-veiculo--container,
+.dashboard--container,
+.configuracoes--container {
   background-color: var(--cor-branco);
   padding: 2rem;
   border-radius: 10px;
