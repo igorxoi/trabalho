@@ -219,6 +219,10 @@ a {
   font-size: 12px;
 }
 
+.status.cancelado {
+  background-color: #ffbfb0;
+}
+
 .status.liberado {
   background-color: #c7fde6;
 }
