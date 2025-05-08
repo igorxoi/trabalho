@@ -19,4 +19,10 @@ class User extends Model {
             return false;
         }
     }
+
+    public function getPermissions($userId) {
+        $stmt = $this->db->prepare("SELECT permissoes FROM usuarios WHERE id = ?");
+        $stmt->execute([$userId]);
+        return $stmt->fetchAll(PDO::FETCH_COLUMN);
+    }
 }

@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 function getStatusClass($descricao) {
   $map = [
     'estacionado' => 'estacionado',
@@ -31,4 +33,14 @@ function getVehicleTypeIcon($tipo_vaga_id) {
   ];
 
   return $map[mb_strtolower($tipo_vaga_id)] ?? 'indefinido';
+}
+
+function userHasPermission($item) {
+  if (!isset($_SESSION['user']['permissoes'][0])) {
+    return false;
+  }
+
+  $permissoes = json_decode($_SESSION['user']['permissoes'][0], true);
+
+  return isset($permissoes[$item]) && $permissoes[$item] === true;
 }
