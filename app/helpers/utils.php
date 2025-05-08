@@ -44,3 +44,9 @@ function userHasPermission($item) {
 
   return isset($permissoes[$item]) && $permissoes[$item] === true;
 }
+
+function getItemMenuActive($item) {
+  $screen = explode('/', $_GET['url'])[0];
+  return $screen == $item ? 'ativo' : '';
+}
+
