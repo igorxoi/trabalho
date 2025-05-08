@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=.sliderbar, initial-scale=1.0" />
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="css/style.css">
     <link
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
@@ -64,7 +64,15 @@
         </div>
       </header>
       <div class="card--container">
-        <div class="card--conteudo">
+        <div class="cards-container">
+          <?php foreach ($cards as $card): ?>
+            <div class="card">
+              <h2><?php echo $card['tipo_vaga_id']; ?></h2>
+              <p><?php echo $card['vaga']; ?></p>
+            </div>
+          <?php endforeach; ?>
+        </div>
+        <!-- <div class="card--conteudo">
           <div class="card">
             <div class="veiculo-info">
               <span class="tipo-veiculo">
@@ -248,7 +256,7 @@
               <button id="dar-baixa-veiculo-button">Dar baixa</button>
             </div>
           </div>
-        </div>
+        </div> -->
       </div>
     </main>
   </body>
