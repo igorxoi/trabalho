@@ -37,6 +37,9 @@ const menuItem = document.querySelectorAll(".menu li span");
 const iconeMenu = document.querySelector(".icon-menu");
 
 function definirDisplay(elements, displayStyle) {
+  const nomeLogo = document.querySelector(".nome-estaciona-aqui");
+  nomeLogo.style.display = displayStyle;
+
   elements.forEach((item) => {
     item.style.display = displayStyle;
   });

@@ -1,11 +1,12 @@
 :root {
-  --cor-primaria: #0a6964;
-  --cor-secundaria: #feca47;
+  --cor-primaria: #1040ba;
+  --cor-secundaria: #ececec;
+
 
   --cor-branco: #ffffff;
   --cor-cinza: #9197b3;
 
-  --cor-texto-primario: #252621;
+  --cor-texto-primario: #1F1F1F;
   --cor-texto-secundario: #333333;
 }
 
@@ -46,12 +47,24 @@ body {
 
 .logo {
   height: 95px;
-  padding: 16px;
-  margin-bottom: 1rem;
+  margin-right: 1rem;
+  display: flex;
+  align-items: center;
 }
+
+.logo h1 {
+  display: none;
+  margin-left: 16px;
+}
+
+/* .logo h1 b {
+  color: var(--cor-primaria);
+} */
 
 .logo img {
   width: 100%;
+  height: 50px;
+  width: 50px;
 }
 
 .menu {
@@ -76,9 +89,9 @@ body {
 
 .menu li:hover,
 .item-menu.ativo {
-  color: var(--cor-primaria);
+  color: var(--cor-branco);
   font-weight: 600;
-  background-color: var(--cor-secundaria);
+  background-color: var(--cor-primaria);
 }
 
 a {
@@ -156,6 +169,7 @@ a {
   position: relative;
 }
 
+
 /* CARD */
 .card--conteudo {
   display: grid;
@@ -182,20 +196,16 @@ a {
 
 .tipo-veiculo {
   border-radius: 8px;
-  background-color: var(--cor-secundaria);
+  background-color: var(--cor-primaria);
   padding: 15px;
   display: flex;
   align-items: center;
   justify-content: center;
+  color: var(--cor-secundaria);
 }
 
 .numero-vaga .material-symbols-outlined {
   font-size: 32px;
-}
-
-.detalhes-veiculo, .item-dashbord .detalhes {
-  display: grid;
-  gap: 4px;
 }
 
 .detalhes-veiculo svg {
@@ -272,13 +282,13 @@ input[type="submit"] {
 
 #editar-veiculo-button,
 #excluir-veiculo-button {
-  background-color: #f0f4f5;
+  background-color: var(--cor-secundaria);
   color: var(--cor-texto-secundario);
 }
 
 #dar-baixa-veiculo-button {
-  background-color: var(--cor-secundaria);
-  color: var(--cor-texto-secundario);
+  background-color: var(--cor-primaria);
+  color: var(--cor-secundaria);
 }
 
 .mais-detalhes span:last-child {
@@ -306,16 +316,21 @@ td {
 }
 
 tr:not(:last-child) {
-  border-bottom: 1px solid var(--cor-secundaria);
+  border-bottom: 1px solid var(--cor-primaria);
 }
 
 th {
-  background: var(--cor-secundaria);
-  color: var(--cor-primaria);
+  background: var(--cor-primaria);
+  color: var(--cor-branco);
   font-size: 14px;
   font-weight: 600;
   font-style: normal;
 }
+
+td .status {
+  display: inline-flex;
+}
+
 
 tr:hover {
   background: #f9f9f9;
@@ -342,14 +357,14 @@ tr:hover {
 }
 
 .opcao-tipo-veiculo.ativo {
-  border: 1px solid var(--cor-secundaria);
+  border: 1px solid var(--cor-primaria);
   box-shadow: none;
   color: var(--cor-primaria);
 }
 
 .opcao-tipo-veiculo.ativo span {
   font-weight: 600;
-  color: var(--cor-primaria);
+  color: var(--cor-texto-primario);
 }
 
 .opcao-tipo-veiculo span {
@@ -381,7 +396,7 @@ tr:hover {
 
 .acoes-cadastrar-veiculo input {
   background: var(--cor-primaria);
-  color: var(--cor-branco);
+  color: var(--cor-secundaria);
 }
 
 .input-formulario {
@@ -433,7 +448,7 @@ input:disabled ~ label {
 /* RESUMO */
 .item-dashbord .icone {
   border-radius: 50%;
-  background-color: var(--cor-primaria);
+  background-color: var(--cor-branco);
   color: var(--cor-branco);
   padding: 15px;
   display: flex;

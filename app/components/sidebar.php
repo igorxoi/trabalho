@@ -2,7 +2,8 @@
 
 <nav class="sidebar">
 	<div class="logo">
-		<img src="" alt="Logo" />
+		<img src="./assets/logo.png" alt="Logo" />
+		<h1 class="nome-estaciona-aqui">Estaciona<b>A</b>qui!</h1>
 	</div>
 	<ul class="menu">
 		<?php if (userHasPermission('dashboard')): ?>
