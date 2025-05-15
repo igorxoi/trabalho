@@ -1,6 +1,13 @@
+window.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll(".moeda").forEach((input) => {
+    input.value = "R$ 0,00";
+  });
+});
+
 function obterData(abreviado) {
-  const data = new Date();
   let horaFormatada = "";
+
+  const data = new Date();
   const opcoesExtenso = {
     weekday: "long",
     day: "numeric",
@@ -90,8 +97,28 @@ function navegarPara(tela) {
     gerenciar: "gerenciar.html",
     cadastro: "cadastro.html",
     configuracoes: "configuracoes.html",
-    historico: "historico.html"
+    historico: "historico.html",
   };
 
   window.location = navegacao[tela];
 }
+
+function mascaraMoeda(campo) {
+  let valor = campo.value;
+
+  valor = valor.replace(/\D/g, "");
+
+  if (valor.length === 0) {
+    campo.value = "R$ 0,00";
+    return;
+  }
+
+  valor = (parseFloat(valor) / 100).toFixed(2);
+
+  campo.value = Number(valor).toLocaleString("pt-BR", {
+    style: "currency",
+    currency: "BRL",
+  });
+}
+
+

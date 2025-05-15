@@ -445,6 +445,10 @@ input:disabled ~ label {
   margin-bottom: 1rem;
 }
 
+.configuracoes--container .grupo-input {
+  grid-template-columns: 2fr 1fr 1fr;
+}
+
 /* RESUMO */
 .item-dashbord .icone {
   border-radius: 50%;
