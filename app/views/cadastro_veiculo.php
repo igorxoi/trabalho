@@ -29,7 +29,7 @@
 
       <div class="cadastro-veiculo--container">
         <h2>Tipo do veículo</h2>
-        <form action="">
+        <form method="POST" action="index.php?url=estacionamento/cadastrarVeiculo">
           <div class="selecao-tipo-veiculo">
             <div
               class="opcao-tipo-veiculo ativo"
