@@ -27,139 +27,71 @@
       </div>
     </header>
     <div class="configuracoes--container">
-      <h2>Quantidade de vagas e preço</h2>
+      <h2>Tipo do veículo</h2>
 
       <form method="POST" action="index.php?url=configuracoes/gerenciarVagas">
-        <h4>Moto</h4>
-
-        <div class="grupo-input">
-          <div class="input-formulario">
-            <input
-              type="number"
-              name="qnt_vagas_moto"
-              required
-              id="qnt_vagas_moto" />
-            <label for="qnt_vagas_moto">Quantidade de vagas</label>
+        <div class="selecao-tipo-veiculo">
+          <div
+            class="opcao-tipo-veiculo ativo"
+            id="veiculo-moto"
+            onclick="selecionarTipoVeiculo(1)">
+            <i class="material-symbols-outlined">two_wheeler</i>
+            <span>Moto</span>
           </div>
-          <div class="input-formulario">
-            <input
-              type="text"
-              name="valor_primeira_hora_moto"
-              required
-              class="moeda"
-              id="valor_primeira_hora_moto"
-              oninput="mascaraMoeda(this)" />
-            <label for="valor_primeira_hora_moto">Valor primeira hora</label>
+          <div
+            class="opcao-tipo-veiculo"
+            id="veiculo-carro-pequeno"
+            onclick="selecionarTipoVeiculo(2)">
+            <i class="material-symbols-outlined">directions_car</i>
+            <span>Carro pequeno</span>
           </div>
-          <div class="input-formulario">
-            <input
-              type="text"
-              name="valor_demais_horas_moto"
-              required
-              class="moeda"
-              id="valor_demais_horas_moto"
-              oninput="mascaraMoeda(this)" />
-            <label for="valor_demais_horas_moto">Valor demais horas</label>
+          <div
+            class="opcao-tipo-veiculo"
+            id="veiculo-carro-grande"
+            onclick="selecionarTipoVeiculo(3)">
+            <i class="material-symbols-outlined">airport_shuttle</i>
+            <span>Carro grande</span>
           </div>
+          <div
+            class="opcao-tipo-veiculo"
+            id="veiculo-caminhao"
+            onclick="selecionarTipoVeiculo(4)">
+            <i class="material-symbols-outlined">local_shipping</i>
+            <span>Caminhão</span>
+          </div>
+          <input type="hidden" name="tipo" required id="tipo" value="1" />
         </div>
 
-        <h4>Carros</h4>
+        <h2>Quantidade de vagas e preço</h2>
 
         <div class="grupo-input">
           <div class="input-formulario">
             <input
               type="number"
-              name="qnt_vagas_carro"
+              name="qnt_vagas"
               required
-              id="qnt_vagas_carro" />
-            <label for="qnt_vagas_carro">Quantidade de vagas</label>
+              id="qnt_vagas" />
+            <label for="qnt_vagas">Quantidade de vagas</label>
           </div>
           <div class="input-formulario">
             <input
               type="text"
-              name="valor_primeira_hora_carro"
+              name="valor_primeira_hora"
               required
               class="moeda"
-              id="valor_primeira_hora_carro"
+              id="valor_primeira_hora"
               oninput="mascaraMoeda(this)" />
-            <label for="valor_primeira_hora_carro">Valor primeira hora</label>
+            <label for="valor_primeira_hora">Valor primeira hora</label>
           </div>
           <div class="input-formulario">
             <input
               type="text"
-              name="valor_demais_horas_carro"
+              name="valor_demais_horas"
               required
               class="moeda"
-              id="valor_demais_horas_carro"
+              id="valor_demais_horas"
               oninput="mascaraMoeda(this)" />
-            <label for="valor_demais_horas_carro">Valor demais horas</label>
-          </div>
-        </div>
-
-        <h4>Carros grandes</h4>
-
-        <div class="grupo-input">
-          <div class="input-formulario">
-            <input
-              type="number"
-              name="qnt_vagas_carro_grande"
-              required
-              class="moeda"
-              id="qnt_vagas_carro_grande" />
-            <label for="qnt_vagas_carro_grande">Quantidade de vagas</label>
-          </div>
-          <div class="input-formulario">
-            <input
-              type="text"
-              name="valor_primeira_hora_carro_grande"
-              required
-              class="moeda"
-              id="valor_primeira_hora_carro_grande"
-              oninput="mascaraMoeda(this)" />
-            <label for="valor_primeira_hora_carro_grande">Valor primeira hora</label>
-          </div>
-          <div class="input-formulario">
-            <input
-              type="text"
-              name="valor_demais_horas_carro_grande"
-              required
-              class="moeda"
-              id="valor_demais_horas_carro_grande"
-              oninput="mascaraMoeda(this)" />
-            <label for="valor_demais_horas_carro_grande">Valor demais horas</label>
-          </div>
-        </div>
-
-        <h4>Caminhões</h4>
-
-        <div class="grupo-input">
-          <div class="input-formulario">
-            <input
-              type="number"
-              name="qnt_vagas_caminhoes"
-              required
-              id="qnt_vagas_caminhoes" />
-            <label for="qnt_vagas_caminhoes">Quantidade de vagas</label>
-          </div>
-          <div class="input-formulario">
-            <input
-              type="text"
-              name="valor_primeira_hora_caminhoes"
-              required
-              class="moeda"
-              id="valor_primeira_hora_caminhoes"
-              oninput="mascaraMoeda(this)" />
-            <label for="valor_primeira_hora_caminhoes">Valor primeira hora</label>
-          </div>
-          <div class="input-formulario">
-            <input
-              type="text"
-              name="valor_demais_horas_caminhoes"
-              required
-              class="moeda"
-              id="valor_demais_horas_caminhoes"
-              oninput="mascaraMoeda(this)" />
-            <label for="valor_demais_horas_caminhoes">Valor demais horas</label>
+            <label for="valor_demais_horas">Valor demais horas</label>
           </div>
         </div>
 
