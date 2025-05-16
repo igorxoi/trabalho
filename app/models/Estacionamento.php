@@ -42,16 +42,21 @@ class Estacionamento extends Model
 			tv.tipo,
 			se.data_fim,
 			s.descricao";
-			// t.valor, 
+		// t.valor, 
 
-		$sql = "SELECT $campos 
-							FROM estacionamento AS e 
-								INNER JOIN veiculo AS v ON e.veiculo_id = v.id 
-								INNER JOIN proprietario AS p ON v.proprietario_id = p.id
-								INNER JOIN tarifa as t ON e.tarifa_id = t.id 
-								INNER JOIN tipo_vaga AS tv ON e.tipo_vaga_id = tv.id
-								INNER JOIN status_estacionamento AS se ON e.id = se.estacionamento_id 
-								INNER JOIN status AS s ON s.id = se.status_id WHERE se.data_fim IS NULL ORDER BY e.id DESC;";
+		$sql = "SELECT 
+							$campos 
+						FROM estacionamento AS e 
+						INNER JOIN veiculo AS v ON e.veiculo_id = v.id 
+						INNER JOIN proprietario AS p ON v.proprietario_id = p.id
+						INNER JOIN tarifa as t ON e.tarifa_id = t.id 
+						INNER JOIN tipo_vaga AS tv ON e.tipo_vaga_id = tv.id
+						INNER JOIN status_estacionamento AS se ON e.id = se.estacionamento_id 
+						INNER JOIN status AS s ON s.id = se.status_id 
+						WHERE 
+							se.data_fim IS NULL 
+							OR se.status_id IN (1, 4) 
+						ORDER BY e.id DESC;";
 
 		$result = $this->db->query($sql);
 
