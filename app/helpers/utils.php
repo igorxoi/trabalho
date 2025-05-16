@@ -2,7 +2,8 @@
 
 session_start();
 
-function getStatusClass($descricao) {
+function getStatusClass($descricao)
+{
   $map = [
     'estacionado' => 'estacionado',
     'pronto para saída' => 'liberado',
@@ -13,7 +14,8 @@ function getStatusClass($descricao) {
   return $map[strtolower($descricao)] ?? 'indefinido';
 }
 
-function getStatusIcon($descricao) {
+function getStatusIcon($descricao)
+{
   $map = [
     'estacionado' => 'timer',
     'pronto para saída' => 'flag',
@@ -24,7 +26,8 @@ function getStatusIcon($descricao) {
   return $map[strtolower($descricao)] ?? 'indefinido';
 }
 
-function getVehicleTypeIcon($tipo_vaga_id) {
+function getVehicleTypeIcon($tipo_vaga_id)
+{
   $map = [
     'moto' => 'two_wheeler',
     'carro pequeno' => 'directions_car',
@@ -35,7 +38,8 @@ function getVehicleTypeIcon($tipo_vaga_id) {
   return $map[mb_strtolower($tipo_vaga_id)] ?? 'indefinido';
 }
 
-function userHasPermission($item) {
+function userHasPermission($item)
+{
   if (!isset($_SESSION['user']['permissoes'][0])) {
     return false;
   }
@@ -45,8 +49,17 @@ function userHasPermission($item) {
   return isset($permissoes[$item]) && $permissoes[$item] === true;
 }
 
-function getItemMenuActive($item) {
+function getItemMenuActive($item)
+{
   $screen = explode('/', $_GET['url'])[0];
   return $screen == $item ? 'ativo' : '';
 }
 
+function formatarValorParaDecimal($valor)
+{
+  $valorLimpo = preg_replace('/[^0-9,\.]/', '', $valor);
+  $valorSemMilhar = preg_replace('/\.(?=.*\,)/', '', $valorLimpo);
+  $valorDecimal = str_replace(',', '.', $valorSemMilhar);
+
+  return number_format((float)$valorDecimal, 2, '.', '');
+}
