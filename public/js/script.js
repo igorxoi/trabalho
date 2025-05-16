@@ -1,19 +1,25 @@
-window.addEventListener("DOMContentLoaded", () => {
-  document.querySelectorAll(".moeda").forEach((input) => {
-    input.value = "R$ 0,00";
-  });
-});
+// VARIÁVEIS GLOBAIS
+const sidebar = document.querySelector(".sidebar");
+const menuItem = document.querySelectorAll(".menu li span");
+const iconeMenu = document.querySelector(".icon-menu");
+const cardsTipo = document.querySelectorAll(".opcao-tipo-veiculo");
 
+const inputQntVagas = document.querySelector("#qnt_vagas");
+const inputValorPrimeiraHora = document.querySelector("#valor_primeira_hora");
+const inputValorDemaisHoras = document.querySelector("#valor_demais_horas");
+
+// FUNÇÕES
 function obterData(abreviado) {
   let horaFormatada = "";
-
   const data = new Date();
+
   const opcoesExtenso = {
     weekday: "long",
     day: "numeric",
     month: "long",
     year: "numeric",
   };
+
   const opcoesAbreviado = {
     weekday: "short",
     day: "numeric",
@@ -28,7 +34,6 @@ function obterData(abreviado) {
 
   if (abreviado) {
     dataFormatada = dataFormatada.replace(/\./g, "").replace(/\sde\s/g, " ");
-
     horaFormatada = data.toLocaleTimeString("pt-BR", {
       hour: "2-digit",
       minute: "2-digit",
@@ -36,12 +41,8 @@ function obterData(abreviado) {
     });
   }
 
-  return (resultado = `${dataFormatada} ${horaFormatada}`);
+  return `${dataFormatada} ${horaFormatada}`;
 }
-
-const sidebar = document.querySelector(".sidebar");
-const menuItem = document.querySelectorAll(".menu li span");
-const iconeMenu = document.querySelector(".icon-menu");
 
 function definirDisplay(elements, displayStyle) {
   const nomeLogo = document.querySelector(".nome-estaciona-aqui");
@@ -60,14 +61,6 @@ function expandirMenu() {
 
   definirDisplay(menuItem, expandido ? "none" : "block");
 }
-
-const dataExtenso = obterData(false);
-const dataAbreviada = obterData(true);
-
-document.querySelector(".header--subtitulo").textContent = dataExtenso;
-document.querySelector("#data_hora").value = dataAbreviada;
-
-const cardsTipo = document.querySelectorAll(".opcao-tipo-veiculo");
 
 function selecionarTipoVeiculo(idTipo) {
   const tipoVeiculoMap = {
@@ -104,9 +97,7 @@ function navegarPara(tela) {
 }
 
 function mascaraMoeda(campo) {
-  let valor = campo.value;
-
-  valor = valor.replace(/\D/g, "");
+  let valor = campo.value.replace(/\D/g, "");
 
   if (valor.length === 0) {
     campo.value = "R$ 0,00";
@@ -121,4 +112,12 @@ function mascaraMoeda(campo) {
   });
 }
 
+// EVENTOS E EXECUÇÕES INICIAIS
+window.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll(".moeda").forEach((input) => {
+    input.value = "R$ 0,00";
+  });
 
+  document.querySelector(".header--subtitulo").textContent = obterData(false);
+  document.querySelector("#data_hora").value = obterData(true);
+});
