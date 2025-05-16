@@ -40,6 +40,7 @@ class Estacionamento extends Model
 			t.data_inicio, 
 			t.data_fim, 
 			tv.tipo,
+			se.data_fim,
 			s.descricao";
 			// t.valor, 
 
@@ -50,7 +51,7 @@ class Estacionamento extends Model
 								INNER JOIN tarifa as t ON e.tarifa_id = t.id 
 								INNER JOIN tipo_vaga AS tv ON e.tipo_vaga_id = tv.id
 								INNER JOIN status_estacionamento AS se ON e.id = se.estacionamento_id 
-								INNER JOIN status AS s ON s.id = se.status_id ORDER BY e.id DESC;";
+								INNER JOIN status AS s ON s.id = se.status_id WHERE se.data_fim IS NULL ORDER BY e.id DESC;";
 
 		$result = $this->db->query($sql);
 
@@ -81,7 +82,7 @@ class Estacionamento extends Model
 			return false;
 		}
 
-		$status_id = $this->statusVeiculoModel->adicionar($estacionamento_id);
+		$status_id = $this->statusVeiculoModel->adicionar($estacionamento_id, 2);
 
 		if (!$status_id) {
 			$this->removerEstacionamento($estacionamento_id);

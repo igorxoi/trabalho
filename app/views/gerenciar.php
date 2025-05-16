@@ -70,7 +70,7 @@
               <hr />
 
               <div class="acoes-card">
-                <button id="excluir-veiculo-button">Excluir</button>
+                <a href="index.php?url=statusVeiculo/cancelar/<?php echo($card['id']);?>" id="excluir-veiculo-button">Cancelar</a>
                 <button id="editar-veiculo-button">Editar</button>
                 <button id="dar-baixa-veiculo-button">Dar baixa</button>
               </div>
