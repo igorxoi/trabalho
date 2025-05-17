@@ -32,6 +32,7 @@ class Estacionamento extends Model
 			t.data_fim,
 			tv.tipo,
 			se.data_fim AS status_data_fim,
+			se.status_id,
 			s.descricao
     ";
 

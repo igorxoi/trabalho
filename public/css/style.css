@@ -2,11 +2,10 @@
   --cor-primaria: #1040ba;
   --cor-secundaria: #ececec;
 
-
   --cor-branco: #ffffff;
   --cor-cinza: #9197b3;
 
-  --cor-texto-primario: #1F1F1F;
+  --cor-texto-primario: #1f1f1f;
   --cor-texto-secundario: #333333;
 }
 
@@ -169,7 +168,6 @@ a {
   position: relative;
 }
 
-
 /* CARD */
 .card--conteudo {
   display: grid;
@@ -187,7 +185,8 @@ a {
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-.veiculo-info, .item-dashbord {
+.veiculo-info,
+.item-dashbord {
   display: grid;
   grid-template-columns: auto 1fr;
   gap: 8px;
@@ -251,7 +250,8 @@ a {
   font-weight: 600;
 }
 
-.mais-detalhes, .item-dashbord .descricao {
+.mais-detalhes,
+.item-dashbord .descricao {
   color: #acacac;
   font-size: 12px;
   display: grid;
@@ -266,7 +266,7 @@ hr {
 
 .acoes-card {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
   gap: 8px;
 }
 
@@ -332,7 +332,6 @@ th {
 td .status {
   display: inline-flex;
 }
-
 
 tr:hover {
   background: #f9f9f9;
