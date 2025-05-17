@@ -73,14 +73,32 @@
               <?php if (in_array($card['status_id'], [1, 4])): ?>
                 <a id="dar-baixa-veiculo-button">Ver detalhes</a>
               <?php else: ?>
+
                 <?php if ($card['status_id'] == 2): ?>
-                  <a href="index.php?url=statusVeiculo/cancelar/<?php echo $card['id']; ?>" id="excluir-veiculo-button">Cancelar</a>
+                  <a
+                    href="index.php?url=statusVeiculo/cancelar/<?php echo $card['id']; ?>"
+                    id="excluir-veiculo-button">
+                    Cancelar
+                  </a>
                 <?php endif; ?>
 
-                <a href="index.php?url=cadastro/index/<?php echo $card['id']; ?>" id="editar-veiculo-button">Editar</a>
-                <a id="dar-baixa-veiculo-button">
-                  <?php echo ($card['status_id'] == 2 ? "Liberar" : "Dar baixa"); ?>
+                <a
+                  href="index.php?url=cadastro/index/<?php echo $card['id']; ?>"
+                  id="editar-veiculo-button">
+                  Editar
                 </a>
+
+                <?php
+                  $acaoUrl = $card['status_id'] == 2
+                    ? "index.php?url=statusVeiculo/liberar/{$card['id']}"
+                    : "index.php?url=statusVeiculo/darBaixa/{$card['id']}";
+
+                  $acaoTexto = $card['status_id'] == 2 ? "Liberar" : "Dar baixa";
+                ?>
+                <a href="<?php echo $acaoUrl; ?>" id="dar-baixa-veiculo-button">
+                  <?php echo $acaoTexto; ?>
+                </a>
+
               <?php endif; ?>
             </div>
           </div>

@@ -12,9 +12,7 @@ class StatusVeiculo extends Model
 		];
 
 		if ($statusId === 1) {
-			$dataHoraAtual = date('Y-m-d H:i:s');
-			$params[':data_fim'] = $dataHoraAtual;
-
+			$params[':data_fim'] = date('Y-m-d H:i:s');
 			$sql = "INSERT INTO 
 								status_estacionamento (
 									registro_estacionamento_id, 
@@ -37,7 +35,7 @@ class StatusVeiculo extends Model
 		return $stmt->execute() ? $this->db->lastInsertId() : false;
 	}
 
-	public function alterar($idRegistroAtivo)
+	public function finalizar($idRegistroAtivo)
 	{
 		$dataHoraAtual = date('Y-m-d H:i:s');
 
@@ -49,19 +47,19 @@ class StatusVeiculo extends Model
 							id = :id";
 
 		$stmt = $this->db->prepare($sql);
-
 		$stmt->bindParam(':data_fim', $dataHoraAtual);
 		$stmt->bindParam(':id', $idRegistroAtivo);
 
 		return $stmt->execute() ? $idRegistroAtivo : false;
 	}
 
-	public function cancelar($estacionamentoId)
+	public function atualizarStatus($estacionamentoId, $statusId)
 	{
 		$idRegistroAtivo = $this->buscarPorEstacionamentoId($estacionamentoId);
+		if (!$idRegistroAtivo) return false;
 
-		$this->alterar($idRegistroAtivo);
-		$this->adicionar($estacionamentoId, 1);
+		$this->finalizar($idRegistroAtivo);
+		return $this->adicionar($estacionamentoId, $statusId);
 	}
 
 	public function buscarPorEstacionamentoId($estacionamentoId)
@@ -79,13 +77,7 @@ class StatusVeiculo extends Model
 		$stmt->bindParam(':registro_estacionamento_id', $estacionamentoId);
 		$stmt->execute();
 
-		$tarifa = $stmt->fetch(PDO::FETCH_ASSOC);
-
-		if ($tarifa) {
-			$id = $tarifa['id'];
-			return $id;
-		}
-
-		return false;
+		$registro = $stmt->fetch(PDO::FETCH_ASSOC);
+		return $registro ? $registro['id'] : false;
 	}
 }
