@@ -46,8 +46,8 @@
             </div>
 
             <div class="mais-detalhes">
-              <span>Qua, 12 Jul 2025</span>
-              <span>18h30</span>
+              <span><?php echo ($card['status_data_formatada']); ?></span>
+              <span><?php echo ($card['status_hora_formatada']); ?></span>
             </div>
 
             <hr />

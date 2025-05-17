@@ -10,10 +10,22 @@ class EstacionamentoController extends Controller
 		require_once __DIR__ . '/../views/gerenciar.php';
 	}
 
-	public function gerenciar()
+		public function gerenciar()
 	{
 		$estacionamentoModel = $this->model('Estacionamento');
-		$cards = $estacionamentoModel->buscarVeiculosEstacionados();
+		$registros = $estacionamentoModel->buscarVeiculosEstacionados();
+
+		setlocale(LC_TIME, 'pt_BR.UTF-8', 'pt_BR', 'portuguese');
+
+		$cards = array_map(function ($card) {
+			$dataHora = new DateTime($card['status_data_inicio']);
+			$dataFormatada = strftime('%a, %d %b %Y', $dataHora->getTimestamp());
+
+			$card['status_data_formatada'] = ucwords(strtolower($dataFormatada));
+			$card['status_hora_formatada'] = $dataHora->format('H\hi');
+
+			return $card;
+		}, $registros);
 
 		$this->view('gerenciar', ['cards' => $cards]);
 	}
