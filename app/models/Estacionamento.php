@@ -2,23 +2,17 @@
 
 require_once __DIR__ . '/../../core/Model.php';
 
-require_once 'Veiculo.php';
-require_once 'Proprietario.php';
 require_once 'StatusVeiculo.php';
 require_once 'Tarifa.php';
 
 class Estacionamento extends Model
 {
-	private $proprietarioModel;
-	private $veiculoModel;
-	private $statusVeiculoModel;
 	private $tarifaModel;
+	private $statusVeiculoModel;
 
 	public function __construct()
 	{
 		parent::__construct();
-		$this->proprietarioModel = new Proprietario();
-		$this->veiculoModel = new Veiculo();
 		$this->statusVeiculoModel = new StatusVeiculo();
 		$this->tarifaModel = new Tarifa();
 	}
@@ -26,104 +20,157 @@ class Estacionamento extends Model
 	public function buscarVeiculosEstacionados()
 	{
 		$campos = "
-			e.id,
-			e.veiculo_id, 
-			e.tipo_vaga_id, 
-			e.vaga, 
-			v.placa, 
-			v.modelo, 
-			v.marca, 
-			v.cor, 
-			p.nome, 
-			p.telefone, 
-			p.email, 
-			t.data_inicio, 
-			t.data_fim, 
+			re.id,
+			re.placa,
+			re.modelo,
+			re.marca,
+			re.cor,
+			re.vaga,
+			re.proprietario,
+			re.telefone,
+			t.data_inicio,
+			t.data_fim,
 			tv.tipo,
-			se.data_fim,
-			s.descricao";
-		// t.valor, 
+			se.data_fim AS status_data_fim,
+			s.descricao
+    ";
 
 		$sql = "SELECT 
 							$campos 
-						FROM estacionamento AS e 
-						INNER JOIN veiculo AS v ON e.veiculo_id = v.id 
-						INNER JOIN proprietario AS p ON v.proprietario_id = p.id
-						INNER JOIN tarifa as t ON e.tarifa_id = t.id 
-						INNER JOIN tipo_vaga AS tv ON e.tipo_vaga_id = tv.id
-						INNER JOIN status_estacionamento AS se ON e.id = se.estacionamento_id 
-						INNER JOIN status AS s ON s.id = se.status_id 
-						WHERE 
+            FROM registro_estacionamento AS re
+            INNER JOIN tarifa AS t ON re.tarifa_id = t.id 
+            INNER JOIN tipo_vaga AS tv ON re.tipo_vaga_id = tv.id
+            INNER JOIN status_estacionamento AS se ON re.id = se.registro_estacionamento_id 
+            INNER JOIN status AS s ON s.id = se.status_id 
+            WHERE 
 							se.data_fim IS NULL 
-							OR se.status_id IN (1, 4) 
-						ORDER BY e.id DESC;";
+							OR se.status_id IN (1, 4)
+            ORDER BY re.id DESC;";
 
 		$result = $this->db->query($sql);
 
 		return $result->fetchAll();
 	}
 
-	public function adicionarCarro($dados)
+	public function adicionar($dados)
 	{
-
-		$proprietario_id = $this->proprietarioModel->adicionar($dados['proprietario'], $dados['telefone_proprietario'], 'igor@email');
-
-		if (!$proprietario_id) {
-			return false;
-		}
-
-		$veiculo_id = $this->veiculoModel->adicionar($proprietario_id, $dados['placa'], $dados['modelo'], $dados['marca'], $dados['cor']);
-
-		if (!$veiculo_id) {
-			$this->proprietarioModel->remover($proprietario_id);
-			return false;
-		}
-
-		$estacionamento_id = $this->adicionarEstacionamento($dados['tipo'], $veiculo_id, $dados['vaga']);
-
-		if (!$estacionamento_id) {
-			$this->veiculoModel->remover($veiculo_id);
-			$this->proprietarioModel->remover($proprietario_id);
-			return false;
-		}
-
-		$status_id = $this->statusVeiculoModel->adicionar($estacionamento_id, 2);
-
-		if (!$status_id) {
-			$this->removerEstacionamento($estacionamento_id);
-			$this->veiculoModel->remover($veiculo_id);
-			$this->proprietarioModel->remover($proprietario_id);
-			return false;
-		}
-
-		return $estacionamento_id;
-	}
-
-	private function adicionarEstacionamento($tipo_vaga_id, $veiculo_id, $vaga)
-	{
-		$tarifa_id = $this->tarifaModel->buscarAtiva($tipo_vaga_id);
-
-		$sql = "INSERT INTO estacionamento (tipo_vaga_id, veiculo_id, tarifa_id, vaga) VALUES (:tipo_vaga_id, :veiculo_id, :tarifa_id, :vaga);";
+		$sql = "INSERT INTO 
+							registro_estacionamento (
+								proprietario, 
+								telefone,
+								placa, 
+								modelo, 
+								marca, 
+								cor,
+								tipo_vaga_id, 
+								tarifa_id, 
+								vaga) 
+							VALUES (
+								:proprietario, 
+								:telefone,
+								:placa, 
+								:modelo, 
+								:marca, 
+								:cor,
+								:tipo_vaga_id, 
+								:tarifa_id, 
+								:vaga)";
 
 		$stmt = $this->db->prepare($sql);
 
-		$stmt->bindParam(':tipo_vaga_id', $tipo_vaga_id);
-		$stmt->bindParam(':veiculo_id', $veiculo_id);
-		$stmt->bindParam(':tarifa_id', $tarifa_id);
-		$stmt->bindParam(':vaga', $vaga);
+		$tarifaId = $this->tarifaModel->buscarAtiva($dados['tipo']);
 
-		if ($stmt->execute()) {
-			return $this->db->lastInsertId();
-		} else {
+		$stmt->bindParam(':proprietario', $dados['proprietario']);
+		$stmt->bindParam(':telefone', $dados['telefone']);
+		$stmt->bindParam(':placa', $dados['placa']);
+		$stmt->bindParam(':modelo', $dados['modelo']);
+		$stmt->bindParam(':marca', $dados['marca']);
+		$stmt->bindParam(':cor', $dados['cor']);
+		$stmt->bindParam(':tipo_vaga_id', $dados['tipo']);
+		$stmt->bindParam(':tarifa_id', $tarifaId);
+		$stmt->bindParam(':vaga', $dados['vaga']);
+
+		$registroEstacionamentoId = $stmt->execute() ? $this->db->lastInsertId() : false;
+
+		if (!$registroEstacionamentoId) return false;
+
+		$statusEstacionamentoId = $this->statusVeiculoModel->adicionar($registroEstacionamentoId, 2);
+
+		if (!$statusEstacionamentoId) {
+			$this->remover($registroEstacionamentoId);
 			return false;
 		}
+
+		return $registroEstacionamentoId;
 	}
 
-	private function removerEstacionamento($estacionamento_id)
+	private function remover($estacionamentoId)
 	{
-		$sql = "DELETE FROM estacionamento WHERE id = :id";
+		$sql = "DELETE FROM registro_estacionamento WHERE id = :id";
 		$stmt = $this->db->prepare($sql);
-		$stmt->bindParam(':id', $estacionamento_id);
+		$stmt->bindParam(':id', $estacionamentoId);
 		$stmt->execute();
+	}
+
+	public function alterar($dados, $registroEstacionamentoId)
+	{
+		$sql = "UPDATE 
+							registro_estacionamento 
+						SET
+							proprietario = :proprietario,
+							telefone = :telefone,
+							placa = :placa,
+							modelo = :modelo,
+							marca = :marca,
+							cor = :cor,
+							tipo_vaga_id = :tipo_vaga_id,
+							tarifa_id = :tarifa_id,
+							vaga = :vaga
+    				WHERE 
+							id = :id";
+
+		$stmt = $this->db->prepare($sql);
+
+		$tarifaId = $this->tarifaModel->buscarAtiva($dados['tipo']);
+
+		$stmt->bindParam(':proprietario', $dados['proprietario']);
+		$stmt->bindParam(':telefone', $dados['telefone']);
+		$stmt->bindParam(':placa', $dados['placa']);
+		$stmt->bindParam(':modelo', $dados['modelo']);
+		$stmt->bindParam(':marca', $dados['marca']);
+		$stmt->bindParam(':cor', $dados['cor']);
+		$stmt->bindParam(':tipo_vaga_id', $dados['tipo']);
+		$stmt->bindParam(':tarifa_id', $tarifaId);
+		$stmt->bindParam(':vaga', $dados['vaga']);
+		$stmt->bindParam(':id', $registroEstacionamentoId, PDO::PARAM_INT);
+
+		return $stmt->execute() ? $registroEstacionamentoId : false;
+	}
+
+	public function buscarVeiculoPorId($idVeiculo)
+	{
+		$campos = "
+			id,
+			tipo_vaga_id, 
+			vaga, 
+			placa, 
+			modelo, 
+			marca, 
+			cor, 
+			proprietario, 
+			telefone";
+
+		$sql = "SELECT 
+							$campos 
+						FROM registro_estacionamento
+						WHERE 
+							id = :idVeiculo;";
+
+		$stmt = $this->db->prepare($sql);
+		$stmt->bindParam(':idVeiculo', $idVeiculo, PDO::PARAM_INT);
+
+		$stmt->execute();
+
+		return $stmt->fetch(PDO::FETCH_ASSOC);
 	}
 }

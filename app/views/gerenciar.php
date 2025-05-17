@@ -40,7 +40,7 @@
                     <span class="material-symbols-outlined"><?php echo getStatusIcon($card['descricao']); ?></span>
                     <?php echo($card['descricao']); ?>
                   </span>
-                  <span class="nome-condutor"><?php echo($card['nome']); ?></span> 
+                  <span class="nome-condutor"><?php echo($card['proprietario']); ?></span> 
                   <span class="mais-detalhes"><?php echo($card['modelo'].' / '.$card['placa']); ?></span>
                 </div>
               </div>
@@ -71,7 +71,7 @@
 
               <div class="acoes-card">
                 <a href="index.php?url=statusVeiculo/cancelar/<?php echo($card['id']);?>" id="excluir-veiculo-button">Cancelar</a>
-                <button id="editar-veiculo-button">Editar</button>
+                <a href="index.php?url=cadastro/index/<?php echo($card['id']);?>" id="editar-veiculo-button">Editar</a>
                 <button id="dar-baixa-veiculo-button">Dar baixa</button>
               </div>
             </div>

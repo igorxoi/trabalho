@@ -7,6 +7,7 @@ const cardsTipo = document.querySelectorAll(".opcao-tipo-veiculo");
 const inputQntVagas = document.querySelector("#qnt_vagas");
 const inputValorPrimeiraHora = document.querySelector("#valor_primeira_hora");
 const inputValorDemaisHoras = document.querySelector("#valor_demais_horas");
+const tipoVeiculo = document.querySelector("#tipo").value;
 
 // FUNÇÕES
 function obterData(abreviado) {
@@ -120,4 +121,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
   document.querySelector(".header--subtitulo").textContent = obterData(false);
   document.querySelector("#data_hora").value = obterData(true);
+  console.log(document.querySelector("#tipo").value);
+  
+  selecionarTipoVeiculo(tipoVeiculo);
 });

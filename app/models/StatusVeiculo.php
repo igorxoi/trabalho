@@ -4,20 +4,28 @@ require_once __DIR__ . '/../../core/Model.php';
 
 class StatusVeiculo extends Model
 {
-	public function adicionar($estacionamento_id, $status_id = 2)
+	public function adicionar($registroEstacionamentoId, $statusId)
 	{
 		$params = [
-			':estacionamento_id' => $estacionamento_id,
-			':status_id' => $status_id,
+			':registro_estacionamento_id' => $registroEstacionamentoId,
+			':status_id' => $statusId,
 		];
 
-		if ($status_id === 1) {
+		if ($statusId === 1) {
 			$dataHoraAtual = date('Y-m-d H:i:s');
 			$params[':data_fim'] = $dataHoraAtual;
 
-			$sql = "INSERT INTO status_estacionamento (estacionamento_id, status_id, data_fim) VALUES (:estacionamento_id, :status_id, :data_fim);";
+			$sql = "INSERT INTO 
+								status_estacionamento (
+									registro_estacionamento_id, 
+									status_id, 
+									data_fim) 
+								VALUES (
+									:registro_estacionamento_id, 
+									:status_id, 
+									:data_fim);";
 		} else {
-			$sql = "INSERT INTO status_estacionamento (estacionamento_id, status_id) VALUES (:estacionamento_id, :status_id);";
+			$sql = "INSERT INTO status_estacionamento (registro_estacionamento_id, status_id) VALUES (:registro_estacionamento_id, :status_id);";
 		}
 
 		$stmt = $this->db->prepare($sql);
@@ -33,7 +41,12 @@ class StatusVeiculo extends Model
 	{
 		$dataHoraAtual = date('Y-m-d H:i:s');
 
-		$sql = "UPDATE status_estacionamento SET data_fim = :data_fim WHERE id = :id";
+		$sql = "UPDATE 
+							status_estacionamento 
+						SET 
+							data_fim = :data_fim 
+						WHERE 
+							id = :id";
 
 		$stmt = $this->db->prepare($sql);
 
@@ -53,10 +66,17 @@ class StatusVeiculo extends Model
 
 	public function buscarPorEstacionamentoId($estacionamentoId)
 	{
-		$sql = "SELECT * FROM status_estacionamento WHERE estacionamento_id = :estacionamento_id AND data_fim IS NULL";
+		$sql = "SELECT 
+							* 
+						FROM 
+							status_estacionamento 
+						WHERE 
+							registro_estacionamento_id = :registro_estacionamento_id 
+						AND 
+							data_fim IS NULL";
 
 		$stmt = $this->db->prepare($sql);
-		$stmt->bindParam(':estacionamento_id', $estacionamentoId);
+		$stmt->bindParam(':registro_estacionamento_id', $estacionamentoId);
 		$stmt->execute();
 
 		$tarifa = $stmt->fetch(PDO::FETCH_ASSOC);
