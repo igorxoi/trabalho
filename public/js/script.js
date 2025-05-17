@@ -121,7 +121,6 @@ window.addEventListener("DOMContentLoaded", () => {
 
   document.querySelector(".header--subtitulo").textContent = obterData(false);
   document.querySelector("#data_hora").value = obterData(true);
-  console.log(document.querySelector("#tipo").value);
   
   selecionarTipoVeiculo(tipoVeiculo);
 });
