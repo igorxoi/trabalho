@@ -10,7 +10,7 @@ const proprietario = document.querySelector("#proprietario");
 const modeloPlaca = document.querySelector("#modelo-e-placa");
 
 function darBaixa(id) {
-  fetch("index.php?url=estacionamento/darBaixa", {
+  fetch("index.php?url=estacionamento/buscarVeiculoPorId", {
     method: "POST",
     headers: {
       "Content-Type": "application/x-www-form-urlencoded",
@@ -19,16 +19,14 @@ function darBaixa(id) {
   })
     .then((response) => response.json())
     .then((data) => {
-      if (data.status == "sucesso") {
+      if (data.status === "sucesso") {
         exibirModal(data.dados);
-        return;
+      } else {
+        console.warn("Problemas ao exibir os dados.");
       }
-
-      console.log("problemas ao exibir os dados");
-      return;
     })
     .catch((error) => {
-      console.log("problemas ao exibir os dados" + error);
+      console.error("Erro ao buscar dados do veículo:", error);
     });
 }
 
@@ -45,20 +43,18 @@ function popularModal(veiculo) {
   vaga.textContent = veiculo.vaga;
   dadosEntrada.textContent = veiculo.dataEntrada;
   dadosSaida.textContent = veiculo.dataSaida;
-  valorPrimeiraHora.textContent = veiculo.valorPrimeiraHora;
-  valorDemaisHoras.textContent = veiculo.valorDemaisHoras;
+  valorPrimeiraHora.textContent = formatarParaReal(veiculo.valorPrimeiraHora);
+  valorDemaisHoras.textContent = formatarParaReal(veiculo.valorDemaisHoras);
   tempoEstacionado.textContent = veiculo.tempoEstacionadoFormatado;
-  valorTotal.textContent = veiculo.valorTotal;
+  valorTotal.textContent = formatarParaReal(veiculo.valorTotal);
   proprietario.textContent = veiculo.proprietario;
-  modeloPlaca.textContent = `${veiculo.modelo} / ${veiculo.placa}`
+  modeloPlaca.textContent = `${veiculo.modelo} / ${veiculo.placa}`;
 }
 
-function moeda(campo) {
-  let valor = campo.replace(/\D/g, "");
+function formatarParaReal(valor) {
+  const numerico = parseFloat(valor);
 
-  valor = (parseFloat(valor)).toFixed(2);
-
-  return Number(valor).toLocaleString("pt-BR", {
+  return numerico.toLocaleString("pt-BR", {
     style: "currency",
     currency: "BRL",
   });

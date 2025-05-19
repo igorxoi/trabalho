@@ -94,15 +94,15 @@ class EstacionamentoController extends Controller
 			'modelo' => $dados['modelo'],
 			'proprietario' => $dados['proprietario'],
 			'tempoEstacionadoFormatado' => "{$horas}h {$minutos}m",
-			'valorTotal' => floatval($valorTotal),
-			'valorPrimeiraHora' => floatval($dados['valor_primeira_hora']),
-			'valorDemaisHoras' => floatval($dados['valor_demais_horas']),
+			'valorTotal' => number_format($valorTotal, 2, '.', ''),
+			'valorPrimeiraHora' => number_format($dados['valor_primeira_hora'], 2, '.', ''),
+			'valorDemaisHoras' => number_format($dados['valor_demais_horas'], 2, '.', ''),
 		];
 
 		echo json_encode(['status' => 'sucesso', 'dados' => $veiculo]);
 	}
 
-	private function extrairDadosVeiculo($input, $incluirNome = false)
+	private function extrairDadosVeiculo($input)
 	{
 		$dados = [
 			'tipo' => $input['tipo'] ?? '',
