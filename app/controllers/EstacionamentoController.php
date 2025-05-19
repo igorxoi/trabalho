@@ -1,6 +1,9 @@
 <?php
 
 require_once __DIR__ . '/../../core/Controller.php';
+require_once __DIR__ . '/../helpers/utils.php';
+
+date_default_timezone_set('America/Sao_Paulo');
 
 class EstacionamentoController extends Controller
 {
@@ -10,19 +13,16 @@ class EstacionamentoController extends Controller
 		require_once __DIR__ . '/../views/gerenciar.php';
 	}
 
-		public function gerenciar()
+	public function gerenciar()
 	{
 		$estacionamentoModel = $this->model('Estacionamento');
 		$registros = $estacionamentoModel->buscarVeiculosEstacionados();
 
-		setlocale(LC_TIME, 'pt_BR.UTF-8', 'pt_BR', 'portuguese');
-
 		$cards = array_map(function ($card) {
-			$dataHora = new DateTime($card['status_data_inicio']);
-			$dataFormatada = strftime('%a, %d %b %Y', $dataHora->getTimestamp());
+			$dataFormatada = formatarDataHora($card['status_data_inicio']);
 
-			$card['status_data_formatada'] = ucwords(strtolower($dataFormatada));
-			$card['status_hora_formatada'] = $dataHora->format('H\hi');
+			$card['status_data_formatada'] = $dataFormatada['data'];
+			$card['status_hora_formatada'] = $dataFormatada['hora'];
 
 			return $card;
 		}, $registros);
@@ -32,50 +32,94 @@ class EstacionamentoController extends Controller
 
 	public function cadastrarVeiculo()
 	{
-		$dados = [
-			'tipo' => $_POST['tipo'] ?? '',
-			'placa' => $_POST['placa'] ?? '',
-			'modelo' => $_POST['modelo'] ?? '',
-			'marca' => $_POST['marca'] ?? '',
-			'cor' => $_POST['cor'] ?? '',
-			'proprietario' => $_POST['nome_proprietario'] ?? '',
-			'telefone' => $_POST['telefone_proprietario'] ?? '',
-			'vaga' => $_POST['vaga'] ?? '',
-		];
+		$dados = $this->extrairDadosVeiculo($_POST);
 
 		$estacionamentoModel = $this->model('Estacionamento');
 		$veiculoId = $estacionamentoModel->adicionar($dados);
 
 		if ($veiculoId) {
-			header("Location: index.php?url=estacionamento/gerenciar");
-			exit;
-		} else {
-			echo "Veiculo não cadastrado.";
+			redirect('estacionamento/gerenciar');
 		}
+
+		echo "Veículo não cadastrado.";
 	}
 
 	public function editarVeiculo($registroEstacionamentoId)
 	{
-		$dados = [
-			'tipo' => $_POST['tipo'] ?? '',
-			'placa' => $_POST['placa'] ?? '',
-			'modelo' => $_POST['modelo'] ?? '',
-			'marca' => $_POST['marca'] ?? '',
-			'cor' => $_POST['cor'] ?? '',
-			'proprietario' => $_POST['nome_proprietario'] ?? '',
-			'telefone' => $_POST['telefone_proprietario'] ?? '',
-			'nome' => $_POST['nome'] ?? '',
-			'vaga' => $_POST['vaga'] ?? '',
-		];
+		$dados = $this->extrairDadosVeiculo($_POST);
 
 		$estacionamentoModel = $this->model('Estacionamento');
-		$registroEstacionamentoId = $estacionamentoModel->alterar($dados, $registroEstacionamentoId);
+		$resultado = $estacionamentoModel->alterar($dados, $registroEstacionamentoId);
 
-		if ($registroEstacionamentoId) {
-			header("Location: index.php?url=cadastro/index/$registroEstacionamentoId");
-			exit;
-		} else {
-			echo "Veiculo não cadastrado.";
+		if ($resultado) {
+			redirect("cadastro/index/$registroEstacionamentoId");
 		}
+
+		echo "Veículo não atualizado.";
+	}
+
+	public function buscarVeiculoPorId()
+	{
+		$id = $_POST['id'] ?? null;
+
+		if (!$id) {
+			return $this->responderErro('ID não informado');
+		}
+
+		$estacionamentoModel = $this->model('Estacionamento');
+		$dados = $estacionamentoModel->buscarVeiculoPorId($id);
+
+		if (!$dados) {
+			return $this->responderErro('Veículo não encontrado');
+		}
+
+		$dataEntrada = strtotime($dados['status_data_inicio']);
+		$dataSaida = time();
+
+		$diferencaSegundos = abs($dataSaida - $dataEntrada);
+		$horas = floor($diferencaSegundos / 3600);
+		$minutos = floor(($diferencaSegundos % 3600) / 60);
+
+		$valorTotal = calcularValorEstacionamento($horas, $minutos, $dados);
+
+		$dataEntradaFmt = formatarDataHora($dados['status_data_inicio']);
+		$dataSaidaFmt = formatarDataHora(date('Y-m-d H:i:s', $dataSaida));
+
+		$veiculo = [
+			'dataEntrada' => "{$dataEntradaFmt['data']} às {$dataEntradaFmt['hora']}",
+			'dataSaida' => "{$dataSaidaFmt['data']} às {$dataSaidaFmt['hora']}",
+			'tipoVagaId' => $dados['tipo_vaga_id'],
+			'vaga' => $dados['vaga'],
+			'placa' => $dados['placa'],
+			'modelo' => $dados['modelo'],
+			'proprietario' => $dados['proprietario'],
+			'tempoEstacionadoFormatado' => "{$horas}h {$minutos}m",
+			'valorTotal' => floatval($valorTotal),
+			'valorPrimeiraHora' => floatval($dados['valor_primeira_hora']),
+			'valorDemaisHoras' => floatval($dados['valor_demais_horas']),
+		];
+
+		echo json_encode(['status' => 'sucesso', 'dados' => $veiculo]);
+	}
+
+	private function extrairDadosVeiculo($input, $incluirNome = false)
+	{
+		$dados = [
+			'tipo' => $input['tipo'] ?? '',
+			'placa' => $input['placa'] ?? '',
+			'modelo' => $input['modelo'] ?? '',
+			'marca' => $input['marca'] ?? '',
+			'cor' => $input['cor'] ?? '',
+			'proprietario' => $input['nome_proprietario'] ?? '',
+			'telefone' => $input['telefone_proprietario'] ?? '',
+			'vaga' => $input['vaga'] ?? '',
+		];
+
+		return $dados;
+	}
+
+	private function responderErro($mensagem)
+	{
+		echo json_encode(['status' => 'erro', 'mensagem' => $mensagem]);
 	}
 }

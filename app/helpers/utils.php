@@ -63,3 +63,46 @@ function formatarValorParaDecimal($valor)
 
   return number_format((float)$valorDecimal, 2, '.', '');
 }
+
+function formatarDataHora($dataHora)
+{
+  setlocale(LC_TIME, 'pt_BR.UTF-8', 'pt_BR', 'portuguese');
+
+  $dataHora = new DateTime($dataHora);
+  $dataFormatada = strftime('%a, %d %b %Y', $dataHora->getTimestamp());
+
+  return [
+    'data' => ucwords(strtolower($dataFormatada)),
+    'hora' => $dataHora->format('H\hi'),
+  ];
+}
+
+function calcularValorEstacionamento($horas, $minutos, $veiculo)
+{
+  $valorPrimeiraHora = floatval($veiculo['valor_primeira_hora']);
+  $valorDemaisHoras = floatval($veiculo['valor_demais_horas']);
+  $valorTotal = 0;
+
+  if ($horas > 1) {
+    if ($minutos > 15) {
+      $horas++;
+    }
+
+    $demaisHoras = $horas - 1;
+    $valorTotal = $valorPrimeiraHora + ($demaisHoras * $valorDemaisHoras);
+  } else {
+    if ($minutos > 15) {
+      $valorTotal = $valorPrimeiraHora + $valorDemaisHoras;
+    } else {
+      $valorTotal = $valorPrimeiraHora;
+    }
+  }
+
+  return $valorTotal;
+}
+
+function redirect($url)
+{
+  header("Location: index.php?url={$url}");
+  exit;
+}

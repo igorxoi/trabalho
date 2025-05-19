@@ -32,6 +32,7 @@ class Estacionamento extends Model
 			t.data_fim,
 			tv.tipo,
 			se.data_fim AS status_data_fim,
+			se.data_inicio AS status_data_inicio,
 			se.status_id,
 			s.descricao
     ";
@@ -151,21 +152,34 @@ class Estacionamento extends Model
 	public function buscarVeiculoPorId($idVeiculo)
 	{
 		$campos = "
-			id,
-			tipo_vaga_id, 
-			vaga, 
-			placa, 
-			modelo, 
-			marca, 
-			cor, 
-			proprietario, 
-			telefone";
+			re.id,
+			re.tipo_vaga_id, 
+			re.vaga, 
+			re.placa, 
+			re.modelo, 
+			re.marca, 
+			re.cor, 
+			re.proprietario, 
+			telefone,
+			t.data_inicio,
+			t.data_fim,
+			t.valor_primeira_hora,
+			t.valor_demais_horas,
+			tv.tipo,
+			se.data_fim AS status_data_fim,
+			se.data_inicio AS status_data_inicio,
+			se.status_id,
+			s.descricao";
 
 		$sql = "SELECT 
 							$campos 
-						FROM registro_estacionamento
+						FROM registro_estacionamento AS re
+            INNER JOIN tarifa AS t ON re.tarifa_id = t.id 
+            INNER JOIN tipo_vaga AS tv ON re.tipo_vaga_id = tv.id
+            INNER JOIN status_estacionamento AS se ON re.id = se.registro_estacionamento_id 
+            INNER JOIN status AS s ON s.id = se.status_id 
 						WHERE 
-							id = :idVeiculo;";
+							re.id = :idVeiculo;";
 
 		$stmt = $this->db->prepare($sql);
 		$stmt->bindParam(':idVeiculo', $idVeiculo, PDO::PARAM_INT);
