@@ -71,34 +71,32 @@
 
             <div class="acoes-card">
               <?php if (in_array($card['status_id'], [1, 4])): ?>
-                <a id="dar-baixa-veiculo-button">Ver detalhes</a>
+                <a id="dar-baixa-veiculo-button" class="botao primario">Ver detalhes</a>
               <?php else: ?>
 
                 <?php if ($card['status_id'] == 2): ?>
                   <a
                     href="index.php?url=statusVeiculo/cancelar/<?php echo $card['id']; ?>"
-                    id="excluir-veiculo-button">
+                    class="botao secundario">
                     Cancelar
                   </a>
                 <?php endif; ?>
 
                 <a
                   href="index.php?url=cadastro/index/<?php echo $card['id']; ?>"
-                  id="editar-veiculo-button">
+                  class="botao secundario">
                   Editar
                 </a>
 
-                <?php
-                  $acaoUrl = $card['status_id'] == 2
-                    ? "index.php?url=statusVeiculo/liberar/{$card['id']}"
-                    : "index.php?url=statusVeiculo/darBaixa/{$card['id']}";
-
-                  $acaoTexto = $card['status_id'] == 2 ? "Liberar" : "Dar baixa";
-                ?>
-                <a href="<?php echo $acaoUrl; ?>" id="dar-baixa-veiculo-button">
-                  <?php echo $acaoTexto; ?>
-                </a>
-
+                <?php if ($card['status_id'] == 2): ?>
+                  <a
+                    href="index.php?url=statusVeiculo/liberar/<?php echo $card['id']; ?>"
+                    class="botao primario">
+                    Liberar
+                  </a>
+                <?php else:  ?>
+                  <button class="botao primario" onclick="darBaixa(<?php echo $card['id']; ?>)">Dar baixa</button>
+                <?php endif; ?>
               <?php endif; ?>
             </div>
           </div>
@@ -107,7 +105,65 @@
       </div>
     </div>
   </main>
+
+  <div class="modal--container" id="modal-dados-veiculo">
+    <div class="modal">
+      <div class="veiculo-info">
+        <span class="tipo-veiculo">
+          <i class="material-symbols-outlined"><?php echo getVehicleTypeIcon($card['tipo']); ?></i>
+        </span>
+        <div class="detalhes-veiculo">
+          <span class="nome-condutor" id="proprietario"><?php echo ($card['proprietario']); ?></span>
+          <span class="mais-detalhes" id="modelo-e-placa"><?php echo ($card['modelo'] . ' / ' . $card['placa']); ?></span>
+        </div>
+      </div>
+
+      <div class="mais-detalhes">
+        <span>Vaga ocupada</span>
+        <span id="vaga"><?php echo ($card['vaga']); ?></span>
+      </div>
+
+      <div class="mais-detalhes">
+        <span>Entrada</span>
+        <span id="dados-entrada"></span>
+      </div>
+
+      <div class="mais-detalhes">
+        <span>Saída</span>
+        <span id="dados-saida"></span>
+      </div>
+      <hr>
+
+      <div class="mais-detalhes">
+        <span>Valor primeira hora</span>
+        <span id="valor-primeira-hora">R$ 7,00</span>
+      </div>
+
+      <div class="mais-detalhes">
+        <span>Valor demais</span>
+        <span id="valor-demais-horas">R$ 3,00</span>
+      </div>
+
+      <hr>
+      <div class="mais-detalhes">
+        <span>Tempo estacionado</span>
+        <span id="tempo-estacionado">10h</span>
+      </div>
+
+      <div class="mais-detalhes">
+        <span>Valor total:</span>
+        <span id="valor-total"></span>
+      </div>
+      <hr>
+
+      <div class="acoes-card">
+        <button class="botao secundario" onclick="fecharModal()">Cancelar</button>
+        <button class="botao primario">Dar baixa</button>
+      </div>
+    </div>
+  </div>
 </body>
 <script src="js/script.js"></script>
+<script src="js/modal.js"></script>
 
 </html>

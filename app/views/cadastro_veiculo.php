@@ -159,8 +159,8 @@
         </div>
 
         <div class="acoes-cadastrar-veiculo">
-          <button onclick="navegarPara('dashboard')">Cancelar</button>
-          <input type="submit" value="Cadastrar">
+          <button class="botao secundario" onclick="navegarPara('dashboard')">Cancelar</button>
+          <input class="botao primario" value="Cadastrar">
         </div>
       </form>
     </div>
