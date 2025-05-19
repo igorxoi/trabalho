@@ -106,3 +106,8 @@ function redirect($url)
   header("Location: index.php?url={$url}");
   exit;
 }
+
+function responderErro($mensagem)
+{
+  echo json_encode(['status' => 'erro', 'mensagem' => $mensagem]);
+}

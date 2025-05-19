@@ -1,6 +1,7 @@
 <?php
 
 require_once __DIR__ . '/../../core/Controller.php';
+require_once __DIR__ . '/../helpers/utils.php';
 
 class ConfiguracoesController extends Controller
 {
@@ -20,11 +21,10 @@ class ConfiguracoesController extends Controller
 		$configuracoesModel = $this->model('Configuracoes');
 		$tarifa_id = $configuracoesModel->adicionarTarifa($dados);
 
-		if ($tarifa_id) {
-			header("Location: index.php?url=configuracoes/index");
-			exit;
-		} else {
-			echo "Credenciais inválidas.";
+		if (!$tarifa_id) {
+			return responderErro("Credenciais inválidas.");
 		}
+
+		redirect("configuracoes/index");
 	}
 }

@@ -1,6 +1,7 @@
 <?php
 
 require_once __DIR__ . '/../../core/Model.php';
+
 require_once 'StatusVeiculo.php';
 require_once 'Tarifa.php';
 

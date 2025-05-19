@@ -63,14 +63,14 @@ class EstacionamentoController extends Controller
 		$id = $_POST['id'] ?? null;
 
 		if (!$id) {
-			return $this->responderErro('ID não informado');
+			return responderErro('ID não informado');
 		}
 
 		$estacionamentoModel = $this->model('Estacionamento');
 		$dados = $estacionamentoModel->buscarVeiculoPorId($id);
 
 		if (!$dados) {
-			return $this->responderErro('Veículo não encontrado');
+			return responderErro('Veículo não encontrado');
 		}
 
 		$dataEntrada = strtotime($dados['status_data_inicio']);
@@ -116,10 +116,5 @@ class EstacionamentoController extends Controller
 		];
 
 		return $dados;
-	}
-
-	private function responderErro($mensagem)
-	{
-		echo json_encode(['status' => 'erro', 'mensagem' => $mensagem]);
 	}
 }

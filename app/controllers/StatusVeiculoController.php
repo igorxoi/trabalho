@@ -1,7 +1,7 @@
 <?php
 
-session_start();
 require_once __DIR__ . '/../../core/Controller.php';
+require_once __DIR__ . '/../helpers/utils.php';
 
 class StatusVeiculoController extends Controller
 {
@@ -10,12 +10,11 @@ class StatusVeiculoController extends Controller
 		$statusVeiculoModel = $this->model('StatusVeiculo');
 		$resultado = $statusVeiculoModel->atualizarStatus($estacionamentoId, $novoStatusId);
 
-		if ($resultado) {
-			header("Location: index.php?url=estacionamento/gerenciar");
-			exit;
-		} else {
-			echo "Veículo não encontrado ou erro ao atualizar status.";
+		if (!$resultado) {
+			return responderErro("Veículo não encontrado ou erro ao atualizar status.");
 		}
+
+		redirect("estacionamento/gerenciar");
 	}
 
 	public function cancelar($estacionamentoId)
