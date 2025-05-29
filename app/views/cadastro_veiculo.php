@@ -30,8 +30,13 @@
     <div class="cadastro-veiculo--container">
       <h2>Tipo do veículo</h2>
       <form
+        id="form-veiculo"
         method="POST"
-        action="<?php echo !isset($veiculo) ? "index.php?url=estacionamento/cadastrarVeiculo" : "index.php?url=estacionamento/editarVeiculo/$veiculo[id]"; ?>">
+        action="
+          <?php echo !isset($veiculo)
+            ? "index.php?url=estacionamento/cadastrarVeiculo"
+            : "index.php?url=estacionamento/editarVeiculo/$veiculo[id]"; ?>
+        ">
         <div class="selecao-tipo-veiculo">
           <div
             class="opcao-tipo-veiculo"
@@ -64,7 +69,6 @@
           <input
             type="hidden"
             name="tipo"
-            required
             id="tipo"
             value="<?php echo isset($veiculo['tipo_vaga_id']) ? $veiculo['tipo_vaga_id'] : '1'; ?>" />
         </div>
@@ -76,37 +80,49 @@
             <input
               type="text"
               name="placa"
-              required
               id="placa"
               value="<?php echo isset($veiculo['placa']) ? $veiculo['placa'] : ''; ?>" />
-            <label for="placa">Placa do veículo</label>
+            <label
+              for="placa"
+              id="label-placa">
+              Placa do veículo
+            </label>
           </div>
           <div class="input-formulario">
             <input
               type="text"
               name="modelo"
-              required
               id="modelo"
               value="<?php echo isset($veiculo['modelo']) ? $veiculo['modelo'] : ''; ?>" />
-            <label for="modelo">Modelo</label>
+            <label
+              for="modelo"
+              id="label-modelo">
+              Modelo
+            </label>
           </div>
           <div class="input-formulario">
             <input
               type="text"
               name="marca"
-              required
               id="marca"
               value="<?php echo isset($veiculo['marca']) ? $veiculo['marca'] : ''; ?>" />
-            <label for="marca">Marca</label>
+            <label
+              for="marca"
+              id="label-marca">
+              Marca
+            </label>
           </div>
           <div class="input-formulario">
             <input
               type="text"
               name="cor"
-              required
               id="cor"
               value="<?php echo isset($veiculo['cor']) ? $veiculo['cor'] : ''; ?>" />
-            <label for="cor">Cor</label>
+            <label
+              for="cor"
+              id="label-cor">
+              Cor
+            </label>
           </div>
         </div>
 
@@ -117,19 +133,23 @@
             <input
               type="text"
               name="nome_proprietario"
-              required
               id="nome_proprietario"
               value="<?php echo isset($veiculo['proprietario']) ? $veiculo['proprietario'] : ''; ?>" />
-            <label for="nome_proprietário">Nome do proprietário</label>
+            <label
+              for="nome_proprietário"
+              id="label-nome_proprietario">
+              Nome do proprietário
+            </label>
           </div>
           <div class="input-formulario">
             <input
               type="text"
               name="telefone_proprietario"
-              required
               id="telefone_proprietario"
               value="<?php echo isset($veiculo['telefone']) ? $veiculo['telefone'] : ''; ?>" />
-            <label for="telefone_proprietario">
+            <label
+              for="telefone_proprietario"
+              id="label-telefone_proprietario">
               Telefone do proprietário
             </label>
           </div>
@@ -142,19 +162,24 @@
             <input
               type="text"
               name="vaga"
-              required
               id="vaga"
               value="<?php echo isset($veiculo['vaga']) ? $veiculo['vaga'] : ''; ?>" />
-            <label for="vaga">Vaga ocupada</label>
+            <label
+              for="vaga"
+              id="label-vaga">
+              Vaga ocupada
+            </label>
           </div>
           <div class="input-formulario">
             <input
               type="text"
               name="data_hora"
               disabled
-              required
               id="data_hora" />
-            <label for="data_hora">Data/Hora</label>
+            <label
+              for="data_hora">
+              Data/Hora
+            </label>
           </div>
         </div>
 
@@ -166,6 +191,8 @@
     </div>
   </main>
 </body>
+
 <script src="js/script.js"></script>
+<script src="js/validacoes.js"></script>
 
 </html>

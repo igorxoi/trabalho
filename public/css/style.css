@@ -403,6 +403,7 @@ tr:hover {
   height: 45px;
 }
 
+/* INPUTS */
 .input-formulario {
   position: relative;
 }
@@ -431,13 +432,21 @@ tr:hover {
 }
 
 input:focus ~ label,
-input:valid ~ label,
+.input-formulario input.preenchido ~ label,
 input:disabled ~ label {
   top: 0;
   left: 15px;
   font-size: 12px;
   padding: 0 2px;
   background: var(--cor-branco);
+}
+
+.input-erro {
+  border: 1px solid red !important;
+}
+
+.input-erro ~ label {
+  color:  red !important;
 }
 
 /* CONFIGURACAO */

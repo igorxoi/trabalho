@@ -29,7 +29,10 @@
     <div class="configuracoes--container">
       <h2>Tipo do veículo</h2>
 
-      <form method="POST" action="index.php?url=configuracoes/gerenciarVagas">
+      <form
+        method="POST"
+        id="form-configuracoes"
+        action="index.php?url=configuracoes/gerenciarVagas">
         <div class="selecao-tipo-veiculo">
           <div
             class="opcao-tipo-veiculo ativo"
@@ -69,29 +72,35 @@
             <input
               type="number"
               name="qnt_vagas"
-              required
+              class="preenchido"
               id="qnt_vagas" />
-            <label for="qnt_vagas">Quantidade de vagas</label>
+            <label
+              for="qnt_vagas">
+              Quantidade de vagas
+            </label>
           </div>
           <div class="input-formulario">
             <input
               type="text"
               name="valor_primeira_hora"
-              required
               class="moeda"
               id="valor_primeira_hora"
-              oninput="mascaraMoeda(this)" />
-            <label for="valor_primeira_hora">Valor primeira hora</label>
+              oninput="aplicarMascaraMoeda(this)" />
+            <label
+              for="valor_primeira_hora">
+              Valor primeira hora</label>
           </div>
           <div class="input-formulario">
             <input
               type="text"
               name="valor_demais_horas"
-              required
               class="moeda"
               id="valor_demais_horas"
-              oninput="mascaraMoeda(this)" />
-            <label for="valor_demais_horas">Valor demais horas</label>
+              oninput="aplicarMascaraMoeda(this)" />
+            <label
+              for="valor_demais_horas">
+              Valor demais horas
+            </label>
           </div>
         </div>
 
@@ -103,6 +112,8 @@
     </div>
   </main>
 </body>
+
 <script src="js/script.js"></script>
+<script src="js/validacoes.js"></script>
 
 </html>

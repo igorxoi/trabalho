@@ -8,6 +8,8 @@ const inputQntVagas = document.querySelector("#qnt_vagas");
 const inputValorPrimeiraHora = document.querySelector("#valor_primeira_hora");
 const inputValorDemaisHoras = document.querySelector("#valor_demais_horas");
 const tipoVeiculo = document.querySelector("#tipo").value;
+const inputPlaca = document.querySelector("#placa");
+const inputTelefone = document.querySelector("#telefone_proprietario");
 
 // FUNÇÕES
 function obterData(abreviado) {
@@ -97,7 +99,7 @@ function navegarPara(tela) {
   window.location = navegacao[tela];
 }
 
-function mascaraMoeda(campo) {
+function aplicarMascaraMoeda(campo) {
   let valor = campo.value.replace(/\D/g, "");
 
   if (valor.length === 0) {
@@ -113,14 +115,50 @@ function mascaraMoeda(campo) {
   });
 }
 
+function aplicarMascaraPlaca(input) {
+  input.addEventListener("input", () => {
+    let valor = input.value.toUpperCase().replace(/[^A-Z0-9]/g, "");
+
+    if (valor.length > 7) valor = valor.slice(0, 7);
+
+    // Aplica o padrão: 3 letras, 1 número, 1 letra ou número, 2 números
+    const placaFormatada = valor
+      .replace(/^([A-Z]{0,3})/, "$1")
+      .replace(/^([A-Z]{3})([0-9]{0,1})/, "$1$2")
+      .replace(/^([A-Z]{3}[0-9]{1})([A-Z0-9]{0,1})/, "$1$2")
+      .replace(/^([A-Z]{3}[0-9]{1}[A-Z0-9]{1})([0-9]{0,2}).*/, "$1$2");
+
+    input.value = placaFormatada;
+  });
+}
+
+function aplicarMascaraTelefone(input) {
+  input.addEventListener("input", () => {
+    let valor = input.value.replace(/\D/g, "").slice(0, 11);
+
+    if (valor.length >= 2) {
+      valor = `(${valor.slice(0, 2)}) ${valor.slice(2)}`;
+    }
+
+    if (valor.length >= 7) {
+      valor = valor.replace(/(\(\d{2}\))\s?(\d{5})(\d{0,4})/, "$1 $2-$3");
+    }
+
+    input.value = valor.trim();
+  });
+}
+
 // EVENTOS E EXECUÇÕES INICIAIS
 window.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll(".moeda").forEach((input) => {
     input.value = "R$ 0,00";
+    input.classList.add("preenchido");
   });
 
   document.querySelector(".header--subtitulo").textContent = obterData(false);
   document.querySelector("#data_hora").value = obterData(true);
-  
+
+  aplicarMascaraPlaca(inputPlaca);
+  aplicarMascaraTelefone(inputTelefone);
   selecionarTipoVeiculo(tipoVeiculo);
 });
