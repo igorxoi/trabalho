@@ -81,6 +81,7 @@
               type="text"
               name="placa"
               id="placa"
+              maxlength="7"
               value="<?php echo isset($veiculo['placa']) ? $veiculo['placa'] : ''; ?>" />
             <label
               for="placa"
@@ -93,6 +94,7 @@
               type="text"
               name="modelo"
               id="modelo"
+              maxlength="20"
               value="<?php echo isset($veiculo['modelo']) ? $veiculo['modelo'] : ''; ?>" />
             <label
               for="modelo"
@@ -105,6 +107,7 @@
               type="text"
               name="marca"
               id="marca"
+              maxlength="20"
               value="<?php echo isset($veiculo['marca']) ? $veiculo['marca'] : ''; ?>" />
             <label
               for="marca"
@@ -117,6 +120,7 @@
               type="text"
               name="cor"
               id="cor"
+              maxlength="20"
               value="<?php echo isset($veiculo['cor']) ? $veiculo['cor'] : ''; ?>" />
             <label
               for="cor"
@@ -134,6 +138,7 @@
               type="text"
               name="nome_proprietario"
               id="nome_proprietario"
+              maxlength="30"
               value="<?php echo isset($veiculo['proprietario']) ? $veiculo['proprietario'] : ''; ?>" />
             <label
               for="nome_proprietário"
@@ -146,6 +151,7 @@
               type="text"
               name="telefone_proprietario"
               id="telefone_proprietario"
+              maxlength="20"
               value="<?php echo isset($veiculo['telefone']) ? $veiculo['telefone'] : ''; ?>" />
             <label
               for="telefone_proprietario"
@@ -163,6 +169,7 @@
               type="text"
               name="vaga"
               id="vaga"
+              maxlength="5"
               value="<?php echo isset($veiculo['vaga']) ? $veiculo['vaga'] : ''; ?>" />
             <label
               for="vaga"
