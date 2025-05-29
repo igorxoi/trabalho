@@ -16,15 +16,38 @@ class EstacionamentoController extends Controller
 	public function gerenciar()
 	{
 		$estacionamentoModel = $this->model('Estacionamento');
-		$registros = $estacionamentoModel->buscarVeiculosEstacionados();
+		$registros = $estacionamentoModel->buscarVeiculos(true);
 
 		$cards = array_map(function ($card) {
 			$dataFormatada = formatarDataHora($card['status_data_inicio']);
 
-			$card['status_data_formatada'] = $dataFormatada['data'];
-			$card['status_hora_formatada'] = $dataFormatada['hora'];
+			$dataEntrada = strtotime($card['status_data_inicio']);
+			$dataSaida = time();
 
-			return $card;
+			$diferencaSegundos = abs($dataSaida - $dataEntrada);
+			$horas = floor($diferencaSegundos / 3600);
+			$minutos = floor(($diferencaSegundos % 3600) / 60);
+
+			$valorTotal = calcularValorEstacionamento($horas, $minutos, $card);
+
+			return [
+				'id' => $card['id'],
+				'dataEntrada' => $dataFormatada['data'],
+				'dataSaida' => "",
+				'horaEntrada' => $dataFormatada['hora'],
+				'tipoVagaId' => $card['tipo_vaga_id'],
+				'vaga' => $card['vaga'],
+				'tipo' => $card['tipo'],
+				'status_id' => intval($card['status_id']),
+				'status_data_formatada' => $dataFormatada['data'],
+				'status_hora_formatada' => $dataFormatada['hora'],
+				'placa' => $card['placa'],
+				'modelo' => $card['modelo'],
+				'proprietario' => $card['proprietario'],
+				'descricao' => $card['descricao'],
+				'tempoEstacionadoFormatado' => "{$horas}h {$minutos}m",
+				'valorTotal' => number_format($valorTotal, 2, '.', ''),
+			];
 		}, $registros);
 
 		$this->view('gerenciar', ['cards' => $cards]);

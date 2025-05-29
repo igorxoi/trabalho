@@ -59,12 +59,12 @@
 
             <div class="mais-detalhes">
               <span>Tempo Estacionado</span>
-              <span>2h 30m</span>
+              <span><?php echo ($card['tempoEstacionadoFormatado']); ?></span>
             </div>
 
             <div class="mais-detalhes">
               <span>Valor estimado</span>
-              <span>R$ 25,00</span>
+              <span><?php echo ($card['valorTotal']); ?></span>
             </div>
 
             <hr />
@@ -136,18 +136,18 @@
 
       <div class="mais-detalhes">
         <span>Valor primeira hora</span>
-        <span id="valor-primeira-hora">R$ 7,00</span>
+        <span id="valor-primeira-hora"></span>
       </div>
 
       <div class="mais-detalhes">
         <span>Valor demais</span>
-        <span id="valor-demais-horas">R$ 3,00</span>
+        <span id="valor-demais-horas"></span>
       </div>
 
       <hr>
       <div class="mais-detalhes">
         <span>Tempo estacionado</span>
-        <span id="tempo-estacionado">10h</span>
+        <span id="tempo-estacionado"></span>
       </div>
 
       <div class="mais-detalhes">

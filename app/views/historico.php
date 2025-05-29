@@ -41,52 +41,23 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>A3</td>
-            <td>Igor Xavier</td>
-            <td>Honda / ADC2021</td>
-            <td>12 Jul 2025</td>
-            <td>18h30</td>
-            <td>2h 30m</td>
-            <td>R$ 25,00</td>
-            <td>
-              <span class="status estacionado">
-                <span class="material-symbols-outlined">timer</span>
-                Estacionado
-              </span>
-            </td>
-          </tr>
-          <tr>
-            <td>A3</td>
-            <td>Igor Xavier</td>
-            <td>Honda / ADC2021</td>
-            <td>12 Jul 2025</td>
-            <td>18h30</td>
-            <td>2h 30m</td>
-            <td>R$ 25,00</td>
-            <td>
-              <span class="status liberado">
-                <span class="material-symbols-outlined">flag</span>
-
-                Pronto para saída
-              </span>
-            </td>
-          </tr>
-          <tr>
-            <td>A3</td>
-            <td>Igor Xavier</td>
-            <td>Honda / ADC2021</td>
-            <td>12 Jul 2025</td>
-            <td>18h30</td>
-            <td>2h 30m</td>
-            <td>R$ 25,00</td>
-            <td>
-              <span class="status baixa">
-                <span class="material-symbols-outlined">done_all</span>
-                Baixa realizada
-              </span>
-            </td>
-          </tr>
+          <?php foreach ($dados as $item): ?>
+            <tr>
+              <td><?php echo ($item['vaga']); ?></td>
+              <td><?php echo ($item['proprietario']); ?></td>
+              <td><?php echo ($item['modelo']); ?> / <?php echo ($item['placa']); ?></td>
+              <td><?php echo ($item['dataEntrada']); ?></td>
+              <td><?php echo ($item['horaEntrada']); ?></td>
+              <td><?php echo ($item['tempoEstacionadoFormatado']); ?></td>
+              <td><?php echo ($item['valorTotal']); ?></td>
+              <td>
+                <span class="status <?php echo getStatusClass($item['descricao']); ?>">
+                  <span class="material-symbols-outlined"><?php echo getStatusIcon($item['descricao']); ?></span>
+                  <?php echo ($item['descricao']); ?>
+                </span>
+              </td>
+            </tr>
+          <?php endforeach; ?>
         </tbody>
       </table>
 

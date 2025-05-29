@@ -17,19 +17,32 @@ class Estacionamento extends Model
 		$this->statusVeiculoModel = new StatusVeiculo();
 	}
 
-	public function buscarVeiculosEstacionados()
+	public function buscarVeiculos($filtrarEstacionados = false)
 	{
-		$sql = "SELECT " . $this->getCamposConsulta() . "
-				FROM registro_estacionamento AS re
-				INNER JOIN tarifa AS t ON re.tarifa_id = t.id
-				INNER JOIN tipo_vaga AS tv ON re.tipo_vaga_id = tv.id
-				INNER JOIN status_estacionamento AS se ON re.id = se.registro_estacionamento_id
-				INNER JOIN status AS s ON s.id = se.status_id
-				WHERE se.data_fim IS NULL OR se.status_id IN (1, 4)
-				ORDER BY re.id DESC";
+		$sql = "
+			WITH ultimo_status AS (
+				SELECT 
+					se.*,
+					ROW_NUMBER() OVER (PARTITION BY se.registro_estacionamento_id ORDER BY se.id DESC) AS rn
+				FROM status_estacionamento se
+			)
+			SELECT 
+				" . $this->getCamposConsulta(true) . ",
+				us.data_fim AS ultima_data_fim
+			FROM registro_estacionamento AS re
+			INNER JOIN tarifa AS t ON re.tarifa_id = t.id
+			INNER JOIN tipo_vaga AS tv ON re.tipo_vaga_id = tv.id
+			INNER JOIN (
+				SELECT * FROM ultimo_status WHERE rn = 1
+			) AS us ON re.id = us.registro_estacionamento_id
+			INNER JOIN status_estacionamento AS se ON se.id = us.id -- alias us como se
+			INNER JOIN status AS s ON s.id = se.status_id
+			" . ($filtrarEstacionados ? "WHERE se.status_id IN (2, 3)" : "") . "
+			ORDER BY re.id DESC";
 
 		return $this->db->query($sql)->fetchAll();
 	}
+
 
 	public function adicionar($dados)
 	{
