@@ -177,17 +177,19 @@
               Vaga ocupada
             </label>
           </div>
-          <div class="input-formulario">
-            <input
-              type="text"
-              name="data_hora"
-              disabled
-              id="data_hora" />
-            <label
-              for="data_hora">
-              Data/Hora
-            </label>
-          </div>
+          <?php if (!isset($veiculo['id'])): ?>
+            <div class="input-formulario">
+              <input
+                type="text"
+                name="data_hora"
+                disabled
+                id="data_hora" />
+              <label
+                for="data_hora">
+                Data/Hora
+              </label>
+            </div>
+          <?php endif; ?>
         </div>
 
         <div class="acoes-cadastrar-veiculo">

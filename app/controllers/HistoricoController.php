@@ -30,7 +30,6 @@ class HistoricoController extends Controller
 			$minutos = floor(($diferencaSegundos % 3600) / 60);
 
 			$valorTotal = calcularValorEstacionamento($horas, $minutos, $item);
-
 			$dataFormatada = formatarDataHora($item['status_data_inicio']);
 
 			return [
