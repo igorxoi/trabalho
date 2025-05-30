@@ -111,3 +111,7 @@ function responderErro($mensagem)
 {
   echo json_encode(['status' => 'erro', 'mensagem' => $mensagem]);
 }
+
+function formatarParaReais($valor) {
+  return 'R$ ' . number_format($valor, 2, ',', '.');
+}

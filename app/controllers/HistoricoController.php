@@ -3,6 +3,8 @@
 require_once __DIR__ . '/../../core/Controller.php';
 require_once __DIR__ . '/../helpers/utils.php';
 
+date_default_timezone_set('America/Sao_Paulo');
+
 class HistoricoController extends Controller
 {
 	public function index()
@@ -17,20 +19,22 @@ class HistoricoController extends Controller
 		$registros = $estacionamentoModel->buscarVeiculos();
 
 		$dados = array_map(function ($item) {
-			$dataFormatada = formatarDataHora($item['status_data_inicio']);
+			$dataInicio = $item['data_inicio_entrada'];
+			$dataSaida = $item['status_data_fim'] ?: date('Y-m-d H:i:s');
 
-			$dataEntrada = strtotime($item['status_data_inicio']);
-			$dataSaida = $item['data_fim'] ? strtotime($item['data_fim']) : time();
+			$dataEntrada = strtotime($dataInicio);
+			$dataSaidaTimestamp = strtotime($dataSaida);
 
-			$diferencaSegundos = abs($dataSaida - $dataEntrada);
+			$diferencaSegundos = abs($dataSaidaTimestamp - $dataEntrada);
 			$horas = floor($diferencaSegundos / 3600);
 			$minutos = floor(($diferencaSegundos % 3600) / 60);
 
 			$valorTotal = calcularValorEstacionamento($horas, $minutos, $item);
 
+			$dataFormatada = formatarDataHora($item['status_data_inicio']);
+
 			return [
 				'dataEntrada' => $dataFormatada['data'],
-				'dataSaida' => "",
 				'horaEntrada' => $dataFormatada['hora'],
 				'tipoVagaId' => $item['tipo_vaga_id'],
 				'vaga' => $item['vaga'],
@@ -39,7 +43,7 @@ class HistoricoController extends Controller
 				'proprietario' => $item['proprietario'],
 				'descricao' => $item['descricao'],
 				'tempoEstacionadoFormatado' => "{$horas}h {$minutos}m",
-				'valorTotal' => number_format($valorTotal, 2, '.', ''),
+				'valorTotal' => formatarParaReais($valorTotal),
 			];
 		}, $registros);
 

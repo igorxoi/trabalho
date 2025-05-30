@@ -46,7 +46,7 @@ class EstacionamentoController extends Controller
 				'proprietario' => $card['proprietario'],
 				'descricao' => $card['descricao'],
 				'tempoEstacionadoFormatado' => "{$horas}h {$minutos}m",
-				'valorTotal' => number_format($valorTotal, 2, '.', ''),
+				'valorTotal' => formatarParaReais($valorTotal),
 			];
 		}, $registros);
 
