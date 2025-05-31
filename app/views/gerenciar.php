@@ -164,7 +164,10 @@
   </div>
 
   <div id="snackbar">
-    <span>Some text some message..</span>
+    <div>
+      <span>Sucesso</span>
+      Saída registrada com sucesso. O veículo teve sua baixa realizada.
+    </div>
   </div>
 </body>
 <script src="js/script.js"></script>

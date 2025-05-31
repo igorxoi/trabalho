@@ -1,4 +1,4 @@
-const modalDadosVeiculo = document.querySelector("#modal-dados-veiculo");
+const modal = document.querySelector("#modal-dados-veiculo");
 const vaga = document.querySelector("#vaga");
 const dadosEntrada = document.querySelector("#dados-entrada");
 const dadosSaida = document.querySelector("#dados-saida");
@@ -39,12 +39,12 @@ function abrirModalDarBaixa(id) {
 }
 
 function exibirModal(veiculo) {
-  modalDadosVeiculo.classList.add("exibirModal");
+  modal.classList.add("exibirModal");
   popularModal(veiculo);
 }
 
 function fecharModal() {
-  modalDadosVeiculo.classList.remove("exibirModal");
+  modal.classList.remove("exibirModal");
 }
 
 function popularModal(veiculo) {
@@ -78,10 +78,9 @@ function darBaixa(id) {
   })
     .then((response) => response.json())
     .then((data) => {
-      console.log(data);
-      
       if (data.status === "sucesso") {
-        exibirModalBaixaRealizada();
+        fecharModal();
+        exibirSnackbar();
       } else {
         alert("Problemas ao exibir os dados.");
       }
@@ -91,7 +90,12 @@ function darBaixa(id) {
     });
 }
 
-function exibirModalBaixaRealizada() {
-  
-}
+function exibirSnackbar() {
+  const snackbar = document.getElementById("snackbar");
+  snackbar.className = "show";
 
+  setTimeout(function () {
+    snackbar.classList.remove("show");
+    window.location.href = "index.php?url=estacionamento/index";
+  }, 2800);
+}
