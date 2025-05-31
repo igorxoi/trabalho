@@ -80,6 +80,7 @@ function darBaixa(id) {
     .then((data) => {
       if (data.status === "sucesso") {
         fecharModal();
+        removerCard(data.dados.estacionamentoId);
         exibirSnackbar();
       } else {
         alert("Problemas ao exibir os dados.");
@@ -96,6 +97,10 @@ function exibirSnackbar() {
 
   setTimeout(function () {
     snackbar.classList.remove("show");
-    window.location.href = "index.php?url=estacionamento/index";
   }, 2800);
+}
+
+function removerCard(id) {
+  const div = document.getElementById(`card-${id}`);
+  div.remove();
 }

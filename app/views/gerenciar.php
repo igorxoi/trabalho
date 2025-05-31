@@ -30,7 +30,7 @@
       <div class="card--conteudo">
 
         <?php foreach ($cards as $card): ?>
-          <div class="card">
+          <div class="card" id="card-<?php echo $card['id']; ?>">
             <div class="veiculo-info">
               <span class="tipo-veiculo">
                 <i class="material-symbols-outlined"><?php echo getVehicleTypeIcon($card['tipo']); ?></i>
