@@ -66,13 +66,46 @@ function formatarValorParaDecimal($valor)
 
 function formatarDataHora($dataHora)
 {
-  setlocale(LC_TIME, 'pt_BR.UTF-8', 'pt_BR', 'portuguese');
+  $diasDaSemana = [
+    'Sunday' => 'Dom',
+    'Monday' => 'Seg',
+    'Tuesday' => 'Ter',
+    'Wednesday' => 'Qua',
+    'Thursday' => 'Qui',
+    'Friday' => 'Sex',
+    'Saturday' => 'Sáb'
+  ];
+
+  $meses = [
+    'Jan' => 'Jan',
+    'Feb' => 'Fev',
+    'Mar' => 'Mar',
+    'Apr' => 'Abr',
+    'May' => 'Mai',
+    'Jun' => 'Jun',
+    'Jul' => 'Jul',
+    'Aug' => 'Ago',
+    'Sep' => 'Set',
+    'Oct' => 'Out',
+    'Nov' => 'Nov',
+    'Dec' => 'Dez'
+  ];
 
   $dataHora = new DateTime($dataHora);
-  $dataFormatada = strftime('%a, %d %b %Y', $dataHora->getTimestamp());
+
+  $diaSemanaIngles = $dataHora->format('l');
+  $mesIngles = $dataHora->format('M');
+
+  $dataFormatada = sprintf(
+    '%s, %s %s %s',
+    $diasDaSemana[$diaSemanaIngles] ?? $diaSemanaIngles,
+    $dataHora->format('d'),
+    $meses[$mesIngles] ?? $mesIngles,
+    $dataHora->format('Y')
+  );
 
   return [
-    'data' => ucwords(strtolower($dataFormatada)),
+    'data' => $dataFormatada,
     'hora' => $dataHora->format('H\hi'),
   ];
 }
@@ -91,7 +124,7 @@ function calcularValorEstacionamento($horas, $minutos, $veiculo)
     $demaisHoras = $horas - 1;
     $valorTotal = $valorPrimeiraHora + ($demaisHoras * $valorDemaisHoras);
   } else {
-    if ($minutos > 15) {
+    if ($horas >= 1 && $minutos > 15) {
       $valorTotal = $valorPrimeiraHora + $valorDemaisHoras;
     } else {
       $valorTotal = $valorPrimeiraHora;
@@ -112,6 +145,7 @@ function responderErro($mensagem)
   echo json_encode(['status' => 'erro', 'mensagem' => $mensagem]);
 }
 
-function formatarParaReais($valor) {
+function formatarParaReais($valor)
+{
   return 'R$ ' . number_format($valor, 2, ',', '.');
 }

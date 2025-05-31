@@ -109,19 +109,19 @@ class EstacionamentoController extends Controller
 		$dataSaidaFmt = formatarDataHora(date('Y-m-d H:i:s', $dataSaida));
 
 		$veiculo = [
-			'dataEntrada' => "{$dataEntradaFmt['data']} às {$dataEntradaFmt['hora']}",
-			'dataSaida' => "{$dataSaidaFmt['data']} às {$dataSaidaFmt['hora']}",
+			'id' => $dados['id'],
 			'tipoVagaId' => $dados['tipo_vaga_id'],
 			'vaga' => $dados['vaga'],
 			'placa' => $dados['placa'],
 			'modelo' => $dados['modelo'],
 			'proprietario' => $dados['proprietario'],
+			'dataEntrada' => "$dataEntradaFmt[data] às $dataEntradaFmt[hora]",
+			'dataSaida' => "$dataSaidaFmt[data] às $dataSaidaFmt[hora]",
 			'tempoEstacionadoFormatado' => "{$horas}h {$minutos}m",
-			'valorTotal' => number_format($valorTotal, 2, '.', ''),
-			'valorPrimeiraHora' => number_format($dados['valor_primeira_hora'], 2, '.', ''),
-			'valorDemaisHoras' => number_format($dados['valor_demais_horas'], 2, '.', ''),
+			'valorTotal' => formatarParaReais($valorTotal),
+			'valorPrimeiraHora' => formatarParaReais($dados['valor_primeira_hora']),
+			'valorDemaisHoras' => formatarParaReais($dados['valor_demais_horas']),
 		];
-
 		echo json_encode(['status' => 'sucesso', 'dados' => $veiculo]);
 	}
 
