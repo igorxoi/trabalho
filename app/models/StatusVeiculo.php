@@ -11,7 +11,7 @@ class StatusVeiculo extends Model
 			':status_id' => $statusId,
 		];
 
-		if ($statusId === 1) {
+		if ($statusId === 1 || $statusId === 4) {
 			$params[':data_fim'] = date('Y-m-d H:i:s');
 			$sql = "INSERT INTO 
 								status_estacionamento (
@@ -56,10 +56,21 @@ class StatusVeiculo extends Model
 	public function atualizarStatus($estacionamentoId, $statusId)
 	{
 		$idRegistroAtivo = $this->buscarPorEstacionamentoId($estacionamentoId);
+
 		if (!$idRegistroAtivo) return false;
 
-		$this->finalizar($idRegistroAtivo);
-		return $this->adicionar($estacionamentoId, $statusId);
+		if (!$this->finalizar($idRegistroAtivo)) return false;
+
+		$novoStatusId = $this->adicionar($estacionamentoId, $statusId);
+
+		if (!$novoStatusId) return false;
+
+		$retorno = [
+			'statusId' => $statusId,
+			'estacionamentoId' => $estacionamentoId
+		];
+
+		return $retorno;
 	}
 
 	public function buscarPorEstacionamentoId($estacionamentoId)

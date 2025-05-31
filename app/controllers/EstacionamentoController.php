@@ -122,6 +122,7 @@ class EstacionamentoController extends Controller
 			'valorPrimeiraHora' => formatarParaReais($dados['valor_primeira_hora']),
 			'valorDemaisHoras' => formatarParaReais($dados['valor_demais_horas']),
 		];
+
 		echo json_encode(['status' => 'sucesso', 'dados' => $veiculo]);
 	}
 

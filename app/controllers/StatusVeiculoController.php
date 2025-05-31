@@ -14,6 +14,11 @@ class StatusVeiculoController extends Controller
 			return responderErro("Veículo não encontrado ou erro ao atualizar status.");
 		}
 
+		if ($resultado['statusId'] == 4) {
+			echo json_encode(['status' => 'sucesso', 'dados' => $resultado]);
+			exit;
+		}
+
 		redirect("estacionamento/gerenciar");
 	}
 
@@ -27,8 +32,9 @@ class StatusVeiculoController extends Controller
 		$this->atualizarStatus($estacionamentoId, 3);
 	}
 
-	public function darBaixa($estacionamentoId)
+	public function darBaixa()
 	{
-		$this->atualizarStatus($estacionamentoId, 4);
+		$id = $_POST['id'] ?? null;
+		return $this->atualizarStatus($id, 4);
 	}
 }

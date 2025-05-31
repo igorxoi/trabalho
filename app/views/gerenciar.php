@@ -95,7 +95,7 @@
                     Liberar
                   </a>
                 <?php else:  ?>
-                  <button class="botao primario" onclick="darBaixa(<?php echo $card['id']; ?>)">Dar baixa</button>
+                  <button class="botao primario" onclick="abrirModalDarBaixa(<?php echo $card['id']; ?>)">Dar baixa</button>
                 <?php endif; ?>
               <?php endif; ?>
             </div>
@@ -158,9 +158,13 @@
 
       <div class="acoes-card">
         <button class="botao secundario" onclick="fecharModal()">Cancelar</button>
-        <button class="botao primario">Dar baixa</button>
+        <button class="botao primario" id="btn-dar-baixa">Dar baixa</button>
       </div>
     </div>
+  </div>
+
+  <div id="snackbar">
+    <span>Some text some message..</span>
   </div>
 </body>
 <script src="js/script.js"></script>
