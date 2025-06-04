@@ -1,3 +1,5 @@
+<?php require_once(__DIR__ . '/../helpers/utils.php'); ?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
   <head>
@@ -15,48 +17,9 @@
     <title>Dashboard</title>
   </head>
   <body>
-    <nav class="sidebar">
-      <div class="logo">
-        <img src="" alt="Logo" />
-      </div>
-      <ul class="menu">
-        <a href="index.html">
-          <li class="item-menu ativo">
-            <i class="material-symbols-outlined">dashboard</i>
-            <span>Dashboard</span>
-          </li>
-        </a>
-        <a href="cadastro.html">
-          <li class="item-menu">
-            <i class="material-symbols-outlined">add</i>
-            <span>Cadastro de Veículo</span>
-          </li>
-        </a>
-        <a href="gerenciar.html">
-          <li class="item-menu">
-            <i class="material-symbols-outlined">car_gear</i>
-            <span>Gerenciar Estacionamento</span>
-          </li>
-        </a>
-        <a href="historico.html">
-          <li class="item-menu">
-            <i class="material-symbols-outlined">lists</i>
-            <span>Histórico</span>
-          </li>
-        </a>
-        <a href="configuracoes.html">
-          <li class="item-menu">
-            <i class="material-symbols-outlined">settings</i>
-            <span>Configurações</span>
-          </li>
-        </a>
-        <li class="logout" onclick="expandirMenu()">
-          <i class="material-symbols-outlined icon-menu">arrow_menu_open</i>
-          <span>Recolher</span>
-        </li>
-      </ul>
-    </nav>
-    <main class="main--container">
+    <?php require_once __DIR__ . '/../components/sidebar.php'; ?>
+
+   <main class="main--container">
       <header class="header--conteudo">
         <div class="header--titulo">
           <h1>Resumo do estacionamento</h1>
