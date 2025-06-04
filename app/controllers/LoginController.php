@@ -10,26 +10,26 @@ class LoginController extends Controller
 		require_once __DIR__ . '/../views/login.php';
 	}
 
-	public function authenticate()
+	public function autenticacao()
 	{
 		$email = $_POST['email'];
 		$senha = $_POST['senha'];
 
 		$userModel = $this->model('User');
-		$user = $userModel->checkCredentials($email, $senha);
+		$usuario = $userModel->verificarCredenciais($email, $senha);
 
-		if (!$user) {
+		if (!$usuario) {
 			return responderErro('Credenciais inválidas.');
 		}
 
-		$permissions = $userModel->getPermissions($user['id']);
+		$permissoes = $userModel->buscarPermissoes($usuario['id']);
 
-		$_SESSION['user'] = [
-			'id' => $user['id'],
-			'nome' => $user['nome'],
-			'permissoes' => $permissions
+		$_SESSION['usuario'] = [
+			'id' => $usuario['id'],
+			'nome' => $usuario['nome'],
+			'permissoes' => $permissoes
 		];
 
-		redirect("estacionamento/gerenciar");
+		redirect("estacionamento/index");
 	}
 }

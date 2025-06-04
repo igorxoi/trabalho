@@ -20,48 +20,89 @@
   <?php require_once __DIR__ . '/../components/sidebar.php'; ?>
 
   <main class="main--container">
-    <header class="header--conteudo">
-      <div class="header--titulo">
-        <h1>Histórico</h1>
-        <span class="header--subtitulo"></span>
-      </div>
-    </header>
-    <div class="table--container">
-      <table>
-        <thead>
-          <tr>
-            <th>Vaga</th>
-            <th>Condutor</th>
-            <th>Veículo</th>
-            <th>Data</th>
-            <th>Hora</th>
-            <th>Tempo Estacionado</th>
-            <th>Valor Estimado</th>
-            <th>Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          <?php foreach ($dados as $item): ?>
+      <header class="header--conteudo">
+        <div class="header--titulo">
+          <h1>Histórico</h1>
+          <span class="header--subtitulo"></span>
+        </div>
+      </header>
+      <div class="table--container">
+        <table>
+          <thead>
             <tr>
-              <td><?php echo ($item['vaga']); ?></td>
-              <td><?php echo ($item['proprietario']); ?></td>
-              <td><?php echo ($item['modelo']); ?> / <?php echo ($item['placa']); ?></td>
-              <td><?php echo ($item['dataEntrada']); ?></td>
-              <td><?php echo ($item['horaEntrada']); ?></td>
-              <td><?php echo ($item['tempoEstacionadoFormatado']); ?></td>
-              <td><?php echo ($item['valorTotal']); ?></td>
+              <th>Vaga</th>
+              <th>Condutor</th>
+              <th>Veículo</th>
+              <th>Data</th>
+              <th>Hora</th>
+              <th>Tempo Estacionado</th>
+              <th>Valor Estimado</th>
+              <th>Status</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>A3</td>
+              <td>Igor Xavier</td>
+              <td>Honda / ADC2021</td>
+              <td>12 Jul 2025</td>
+              <td>18h30</td>
+              <td>2h 30m</td>
+              <td>R$ 25,00</td>
               <td>
-                <span class="status <?php echo getStatusClass($item['descricao']); ?>">
-                  <span class="material-symbols-outlined"><?php echo getStatusIcon($item['descricao']); ?></span>
-                  <?php echo ($item['descricao']); ?>
+                <span class="status estacionado">
+                  <span class="material-symbols-outlined">timer</span>
+                  Estacionado
                 </span>
               </td>
+              <td>
+                <!-- <button class="detalhes">Ver Detalhes</button>
+                  <button class="baixa">Dar baixa</button> -->
+              </td>
             </tr>
-          <?php endforeach; ?>
-        </tbody>
-      </table>
+            <tr>
+              <td>A3</td>
+              <td>Igor Xavier</td>
+              <td>Honda / ADC2021</td>
+              <td>12 Jul 2025</td>
+              <td>18h30</td>
+              <td>2h 30m</td>
+              <td>R$ 25,00</td>
+              <td>
+                <span class="status liberado">
+                  <span class="material-symbols-outlined">flag</span>
 
-      <!-- <div class="pagination--content">
+                  Pronto para saída
+                </span>
+              </td>
+              <td>
+                <!-- <button class="detalhes">Ver Detalhes</button>
+                  <button class="baixa">Dar baixa</button> -->
+              </td>
+            </tr>
+            <tr>
+              <td>A3</td>
+              <td>Igor Xavier</td>
+              <td>Honda / ADC2021</td>
+              <td>12 Jul 2025</td>
+              <td>18h30</td>
+              <td>2h 30m</td>
+              <td>R$ 25,00</td>
+              <td>
+                <span class="status baixa">
+                  <span class="material-symbols-outlined">done_all</span>
+                  Baixa realizada
+                </span>
+              </td>
+              <td>
+                <!-- <button class="detalhes">Ver Detalhes</button> -->
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- <div class="pagination--content">
             <div class="pagination">
               <button onclick="paginaAnterior()">Anterior</button>
               <span class="page-info ativo">1</span>
@@ -71,8 +112,8 @@
               <button onclick="proximaPagina()">Próximo</button>
             </div>
           </div> -->
-    </div>
-  </main>
+      </div>
+    </main>
 </body>
 <script src="js/script.js"></script>
 

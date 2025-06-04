@@ -28,149 +28,193 @@
     </header>
     <div class="card--container">
       <div class="card--conteudo">
-
-        <?php foreach ($cards as $card): ?>
-          <div class="card" id="card-<?php echo $card['id']; ?>">
-            <div class="veiculo-info">
-              <span class="tipo-veiculo">
-                <i class="material-symbols-outlined"><?php echo getVehicleTypeIcon($card['tipo']); ?></i>
+        <div class="card">
+          <div class="veiculo-info">
+            <span class="tipo-veiculo">
+              <i class="material-symbols-outlined">two_wheeler</i>
+            </span>
+            <div class="detalhes-veiculo">
+              <span class="status estacionado">
+                <span class="material-symbols-outlined">timer</span>
+                Estacionado
               </span>
-              <div class="detalhes-veiculo">
-                <span class="status <?php echo getStatusClass($card['descricao']); ?>">
-                  <span class="material-symbols-outlined"><?php echo getStatusIcon($card['descricao']); ?></span>
-                  <?php echo ($card['descricao']); ?>
-                </span>
-                <span class="nome-condutor"><?php echo ($card['proprietario']); ?></span>
-                <span class="mais-detalhes"><?php echo ($card['modelo'] . ' / ' . $card['placa']); ?></span>
-              </div>
-            </div>
-
-            <div class="mais-detalhes">
-              <span><?php echo ($card['status_data_formatada']); ?></span>
-              <span><?php echo ($card['status_hora_formatada']); ?></span>
-            </div>
-
-            <hr />
-
-            <div class="mais-detalhes">
-              <span>Vaga ocupada</span>
-              <span><?php echo ($card['vaga']); ?></span>
-            </div>
-
-            <div class="mais-detalhes">
-              <span>Tempo Estacionado</span>
-              <span><?php echo ($card['tempoEstacionadoFormatado']); ?></span>
-            </div>
-
-            <div class="mais-detalhes">
-              <span>Valor estimado</span>
-              <span><?php echo ($card['valorTotal']); ?></span>
-            </div>
-
-            <hr />
-
-            <div class="acoes-card">
-              <?php if (in_array($card['status_id'], [1, 4])): ?>
-                <a id="dar-baixa-veiculo-button" class="botao primario">Ver detalhes</a>
-              <?php else: ?>
-
-                <?php if ($card['status_id'] == 2): ?>
-                  <a
-                    href="index.php?url=statusVeiculo/cancelar/<?php echo $card['id']; ?>"
-                    class="botao secundario">
-                    Cancelar
-                  </a>
-                <?php endif; ?>
-
-                <a
-                  href="index.php?url=cadastro/index/<?php echo $card['id']; ?>"
-                  class="botao secundario">
-                  Editar
-                </a>
-
-                <?php if ($card['status_id'] == 2): ?>
-                  <a
-                    href="index.php?url=statusVeiculo/liberar/<?php echo $card['id']; ?>"
-                    class="botao primario">
-                    Liberar
-                  </a>
-                <?php else:  ?>
-                  <button class="botao primario" onclick="abrirModalDarBaixa(<?php echo $card['id']; ?>)">Dar baixa</button>
-                <?php endif; ?>
-              <?php endif; ?>
+              <span class="nome-condutor">Igor Xavier</span>
+              <span class="mais-detalhes">Honda / ADC2021</span>
             </div>
           </div>
-        <?php endforeach; ?>
 
+          <div class="mais-detalhes">
+            <span>Qua, 12 Jul 2025</span>
+            <span>18h30</span>
+          </div>
+
+          <hr />
+
+          <div class="mais-detalhes">
+            <span>Vaga ocupada</span>
+            <span>21</span>
+          </div>
+
+          <div class="mais-detalhes">
+            <span>Tempo Estacionado</span>
+            <span>2h 30m</span>
+          </div>
+
+          <div class="mais-detalhes">
+            <span>Valor estimado</span>
+            <span>R$ 25,00</span>
+          </div>
+
+          <hr />
+
+          <div class="acoes-card">
+            <button id="excluir-veiculo-button">Excluir</button>
+            <button id="editar-veiculo-button">Editar</button>
+            <button id="dar-baixa-veiculo-button">Dar baixa</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="veiculo-info">
+            <span class="tipo-veiculo">
+              <i class="material-symbols-outlined"> directions_car</i>
+            </span>
+            <div class="detalhes-veiculo">
+              <span class="status liberado">
+                <span class="material-symbols-outlined">flag</span>
+                Pronto para saída
+              </span>
+              <span class="nome-condutor">Igor Xavier</span>
+              <span class="mais-detalhes">Honda / ADC2021</span>
+            </div>
+          </div>
+
+          <div class="mais-detalhes">
+            <span>Qua, 12 Jul 2025</span>
+            <span>18h30</span>
+          </div>
+
+          <hr />
+
+          <div class="mais-detalhes">
+            <span>Vaga ocupada</span>
+            <span>21</span>
+          </div>
+
+          <div class="mais-detalhes">
+            <span>Tempo Estacionado</span>
+            <span>2h 30m</span>
+          </div>
+
+          <div class="mais-detalhes">
+            <span>Valor estimado</span>
+            <span>R$ 25,00</span>
+          </div>
+
+          <hr />
+
+          <div class="acoes-card">
+            <button id="excluir-veiculo-button">Excluir</button>
+            <button id="editar-veiculo-button">Editar</button>
+            <button id="dar-baixa-veiculo-button">Dar baixa</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="veiculo-info">
+            <span class="tipo-veiculo">
+              <i class="material-symbols-outlined">airport_shuttle</i>
+            </span>
+            <div class="detalhes-veiculo">
+              <span class="status baixa">
+                <span class="material-symbols-outlined">done_all</span>
+                Baixa realizada
+              </span>
+              <span class="nome-condutor">Igor Xavier</span>
+              <span class="mais-detalhes">Honda / ADC2021</span>
+            </div>
+          </div>
+
+          <div class="mais-detalhes">
+            <span>Qua, 12 Jul 2025</span>
+            <span>18h30</span>
+          </div>
+
+          <hr />
+
+          <div class="mais-detalhes">
+            <span>Vaga ocupada</span>
+            <span>21</span>
+          </div>
+
+          <div class="mais-detalhes">
+            <span>Tempo Estacionado</span>
+            <span>2h 30m</span>
+          </div>
+
+          <div class="mais-detalhes">
+            <span>Valor estimado</span>
+            <span>R$ 25,00</span>
+          </div>
+
+          <hr />
+
+          <div class="acoes-card">
+            <button id="excluir-veiculo-button">Excluir</button>
+            <button id="editar-veiculo-button">Editar</button>
+            <button id="dar-baixa-veiculo-button">Dar baixa</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="veiculo-info">
+            <span class="tipo-veiculo">
+              <i class="material-symbols-outlined">local_shipping</i>
+            </span>
+            <div class="detalhes-veiculo">
+              <span class="status baixa">
+                <span class="material-symbols-outlined">done_all</span>
+                Baixa realizada
+              </span>
+              <span class="nome-condutor">Igor Xavier</span>
+              <span class="mais-detalhes">Honda / ADC2021</span>
+            </div>
+          </div>
+
+          <div class="mais-detalhes">
+            <span>Qua, 12 Jul 2025</span>
+            <span>18h30</span>
+          </div>
+
+          <hr />
+
+          <div class="mais-detalhes">
+            <span>Vaga ocupada</span>
+            <span>21</span>
+          </div>
+
+          <div class="mais-detalhes">
+            <span>Tempo Estacionado</span>
+            <span>2h 30m</span>
+          </div>
+
+          <div class="mais-detalhes">
+            <span>Valor estimado</span>
+            <span>R$ 25,00</span>
+          </div>
+
+          <hr />
+
+          <div class="acoes-card">
+            <button id="excluir-veiculo-button">Excluir</button>
+            <button id="editar-veiculo-button">Editar</button>
+            <button id="dar-baixa-veiculo-button">Dar baixa</button>
+          </div>
+        </div>
       </div>
     </div>
   </main>
 
-  <div class="modal--container" id="modal-dados-veiculo">
-    <div class="modal">
-      <div class="veiculo-info">
-        <span class="tipo-veiculo">
-          <i class="material-symbols-outlined"><?php echo getVehicleTypeIcon($card['tipo']); ?></i>
-        </span>
-        <div class="detalhes-veiculo">
-          <span class="nome-condutor" id="proprietario"><?php echo ($card['proprietario']); ?></span>
-          <span class="mais-detalhes" id="modelo-e-placa"><?php echo ($card['modelo'] . ' / ' . $card['placa']); ?></span>
-        </div>
-      </div>
-
-      <div class="mais-detalhes">
-        <span>Vaga ocupada</span>
-        <span id="vaga"><?php echo ($card['vaga']); ?></span>
-      </div>
-
-      <div class="mais-detalhes">
-        <span>Entrada</span>
-        <span id="dados-entrada"></span>
-      </div>
-
-      <div class="mais-detalhes">
-        <span>Saída</span>
-        <span id="dados-saida"></span>
-      </div>
-      <hr>
-
-      <div class="mais-detalhes">
-        <span>Valor primeira hora</span>
-        <span id="valor-primeira-hora"></span>
-      </div>
-
-      <div class="mais-detalhes">
-        <span>Valor demais</span>
-        <span id="valor-demais-horas"></span>
-      </div>
-
-      <hr>
-      <div class="mais-detalhes">
-        <span>Tempo estacionado</span>
-        <span id="tempo-estacionado"></span>
-      </div>
-
-      <div class="mais-detalhes">
-        <span>Valor total:</span>
-        <span id="valor-total"></span>
-      </div>
-      <hr>
-
-      <div class="acoes-card">
-        <button class="botao secundario" onclick="fecharModal()">Cancelar</button>
-        <button class="botao primario" id="btn-dar-baixa">Dar baixa</button>
-      </div>
-    </div>
-  </div>
-
-  <div id="snackbar">
-    <div>
-      <span>Sucesso</span>
-      Saída registrada com sucesso. O veículo teve sua baixa realizada.
-    </div>
-  </div>
 </body>
 <script src="js/script.js"></script>
-<script src="js/modal.js"></script>
-
 </html>

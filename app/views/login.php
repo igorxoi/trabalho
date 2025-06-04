@@ -7,7 +7,7 @@
 </head>
 <body>
 	<div class="login-container">
-		<form action="index.php?url=login/authenticate" method="POST">
+		<form action="index.php?url=login/autenticacao" method="POST">
 			<input type="text" name="email" placeholder="E-mail" required>
 			<input type="password" name="senha" placeholder="Senha" required>
 			<button type="submit">Entrar</button>

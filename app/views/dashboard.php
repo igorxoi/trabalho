@@ -19,7 +19,7 @@
   <body>
     <?php require_once __DIR__ . '/../components/sidebar.php'; ?>
 
-    <main class="main--container">
+   <main class="main--container">
       <header class="header--conteudo">
         <div class="header--titulo">
           <h1>Resumo do estacionamento</h1>

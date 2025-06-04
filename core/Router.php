@@ -13,3 +13,7 @@ class Router {
 		call_user_func_array([$controller, $method], array_slice($url, 2));
 	}
 }
+
+// Model = SELECT * from usuarios
+// controller 
+// view = php

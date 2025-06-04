@@ -1,5 +1,3 @@
-<?php require_once(__DIR__ . '/../helpers/utils.php'); ?>
-
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -32,7 +30,7 @@
       <form
         method="POST"
         id="form-configuracoes"
-        action="index.php?url=configuracoes/gerenciarVagas">
+        action="">
         <div class="selecao-tipo-veiculo">
           <div
             class="opcao-tipo-veiculo ativo"

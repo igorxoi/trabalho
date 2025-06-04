@@ -2,136 +2,21 @@
 
 session_start();
 
-function getStatusClass($descricao)
+function verificarPermissaoItemMenu($item)
 {
-  $map = [
-    'estacionado' => 'estacionado',
-    'pronto para saída' => 'liberado',
-    'baixa realizada' => 'baixa',
-    'cancelado' => 'cancelado',
-  ];
-
-  return $map[strtolower($descricao)] ?? 'indefinido';
-}
-
-function getStatusIcon($descricao)
-{
-  $map = [
-    'estacionado' => 'timer',
-    'pronto para saída' => 'flag',
-    'baixa realizada' => 'done_all',
-    'cancelado' => 'close',
-  ];
-
-  return $map[strtolower($descricao)] ?? 'indefinido';
-}
-
-function getVehicleTypeIcon($tipo_vaga_id)
-{
-  $map = [
-    'moto' => 'two_wheeler',
-    'carro pequeno' => 'directions_car',
-    'carro grande' => 'airport_shuttle',
-    'caminhão' => 'local_shipping',
-  ];
-
-  return $map[mb_strtolower($tipo_vaga_id)] ?? 'indefinido';
-}
-
-function userHasPermission($item)
-{
-  if (!isset($_SESSION['user']['permissoes'][0])) {
+  if (!isset($_SESSION['usuario']['permissoes'][0])) {
     return false;
   }
 
-  $permissoes = json_decode($_SESSION['user']['permissoes'][0], true);
+  $permissoes = json_decode($_SESSION['usuario']['permissoes'][0], true);
 
   return isset($permissoes[$item]) && $permissoes[$item] === true;
 }
 
-function getItemMenuActive($item)
+function verificarMenuAtivo($item)
 {
-  $screen = explode('/', $_GET['url'])[0];
-  return $screen == $item ? 'ativo' : '';
-}
-
-function formatarValorParaDecimal($valor)
-{
-  $valorLimpo = preg_replace('/[^0-9,\.]/', '', $valor);
-  $valorSemMilhar = preg_replace('/\.(?=.*\,)/', '', $valorLimpo);
-  $valorDecimal = str_replace(',', '.', $valorSemMilhar);
-
-  return number_format((float)$valorDecimal, 2, '.', '');
-}
-
-function formatarDataHora($dataHora)
-{
-  $diasDaSemana = [
-    'Sunday' => 'Dom',
-    'Monday' => 'Seg',
-    'Tuesday' => 'Ter',
-    'Wednesday' => 'Qua',
-    'Thursday' => 'Qui',
-    'Friday' => 'Sex',
-    'Saturday' => 'Sáb'
-  ];
-
-  $meses = [
-    'Jan' => 'Jan',
-    'Feb' => 'Fev',
-    'Mar' => 'Mar',
-    'Apr' => 'Abr',
-    'May' => 'Mai',
-    'Jun' => 'Jun',
-    'Jul' => 'Jul',
-    'Aug' => 'Ago',
-    'Sep' => 'Set',
-    'Oct' => 'Out',
-    'Nov' => 'Nov',
-    'Dec' => 'Dez'
-  ];
-
-  $dataHora = new DateTime($dataHora);
-
-  $diaSemanaIngles = $dataHora->format('l');
-  $mesIngles = $dataHora->format('M');
-
-  $dataFormatada = sprintf(
-    '%s, %s %s %s',
-    $diasDaSemana[$diaSemanaIngles] ?? $diaSemanaIngles,
-    $dataHora->format('d'),
-    $meses[$mesIngles] ?? $mesIngles,
-    $dataHora->format('Y')
-  );
-
-  return [
-    'data' => $dataFormatada,
-    'hora' => $dataHora->format('H\hi'),
-  ];
-}
-
-function calcularValorEstacionamento($horas, $minutos, $veiculo)
-{
-  $valorPrimeiraHora = floatval($veiculo['valor_primeira_hora']);
-  $valorDemaisHoras = floatval($veiculo['valor_demais_horas']);
-  $valorTotal = 0;
-
-  if ($horas > 1) {
-    if ($minutos > 15) {
-      $horas++;
-    }
-
-    $demaisHoras = $horas - 1;
-    $valorTotal = $valorPrimeiraHora + ($demaisHoras * $valorDemaisHoras);
-  } else {
-    if ($horas >= 1 && $minutos > 15) {
-      $valorTotal = $valorPrimeiraHora + $valorDemaisHoras;
-    } else {
-      $valorTotal = $valorPrimeiraHora;
-    }
-  }
-
-  return $valorTotal;
+  $url = explode('/', $_GET['url'])[0];
+  return $url == $item ? 'ativo' : '';
 }
 
 function redirect($url)
@@ -145,7 +30,3 @@ function responderErro($mensagem)
   echo json_encode(['status' => 'erro', 'mensagem' => $mensagem]);
 }
 
-function formatarParaReais($valor)
-{
-  return 'R$ ' . number_format($valor, 2, ',', '.');
-}
