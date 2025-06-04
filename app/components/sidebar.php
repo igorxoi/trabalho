@@ -43,8 +43,8 @@
 		<?php endif; ?>
 
 		<?php if (userHasPermission('cadastro_usuario')): ?>
-			<a href="index.php?url=configuracoes/index">
-				<li class="item-menu <?php echo(getItemMenuActive("configuracoes")) ?>">
+			<a href="index.php?url=cadastroUsuario/index">
+				<li class="item-menu <?php echo(getItemMenuActive("cadastroUsuario")) ?>">
 					<i class="material-symbols-outlined">person_add</i>
 					<span>Cadastrar usuários</span>
 				</li>

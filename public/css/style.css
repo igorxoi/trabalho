@@ -556,6 +556,51 @@ input:disabled ~ label {
   animation: fadein 0.5s, fadeout 0.5s 2.5s;
 }
 
+/* CHECKBOx */
+.checkbox-formulario {
+  display: flex;
+  gap: 8px;
+  font-size: 14px;
+  color: var(--cor-cinza);
+  align-items: center;
+}
+
+input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  height: 30px;
+  width: 30px;
+  background-color: var(--cor-secundaria);
+  border-radius: 0.5em;
+  cursor: pointer;
+  display: flex;
+  outline: none;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+input[type="checkbox"]:after {
+  font-family: "Material Symbols Outlined";
+  content: "check";
+  font-size: 28px;
+  color: var(--cor-secundaria);
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+input[type="checkbox"]:checked {
+  background-color: var(--cor-primaria);
+}
+
+input[type="checkbox"]:checked:after {
+  display: block;
+}
+
+/* RESPONSIVO */
 @-webkit-keyframes fadein {
   from {
     bottom: 0;
