@@ -15,8 +15,7 @@ function verificarPermissaoItemMenu($item)
 
 function verificarMenuAtivo($item)
 {
-  $url = explode('/', $_GET['url'])[0];
-  return $url == $item ? 'ativo' : '';
+  return $_GET['url'] == $item ? 'ativo' : '';
 }
 
 function redirect($url)

@@ -1,7 +1,9 @@
 <?php
 
-class Router {
-	public static function start() {
+class Router
+{
+	public static function start()
+	{
 		$url = isset($_GET['url']) ? explode('/', $_GET['url']) : ['login', 'index'];
 
 		$controllerName = ucfirst($url[0]) . 'Controller';
@@ -13,7 +15,3 @@ class Router {
 		call_user_func_array([$controller, $method], array_slice($url, 2));
 	}
 }
-
-// Model = SELECT * from usuarios
-// controller 
-// view = php

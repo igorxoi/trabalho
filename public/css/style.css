@@ -468,7 +468,7 @@ input:disabled ~ label {
 /* RESUMO */
 .item-dashbord .icone {
   border-radius: 50%;
-  background: var(--cor-branco);
+  background: var(--cor-primaria);
   color: var(--cor-branco);
   padding: 15px;
   display: flex;

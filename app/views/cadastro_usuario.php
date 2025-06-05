@@ -62,12 +62,12 @@
 
           <div class="checkbox-formulario">
             <input type="checkbox" />
-            <label style="font-size: 14px">Cadastro de Veículo</label>
+            <label style="font-size: 14px">Cadastro de veículo</label>
           </div>
 
           <div class="checkbox-formulario">
             <input type="checkbox" />
-            <label style="font-size: 14px">Gerenciar Estacionamento</label>
+            <label style="font-size: 14px">Gerenciar estacionamento</label>
           </div>
 
           <div class="checkbox-formulario">
