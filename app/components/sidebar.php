@@ -8,7 +8,7 @@
 	<ul class="menu">
 		<?php if (verificarPermissaoItemMenu('dashboard')): ?>
 			<a href="index.php?url=estacionamento/dashboard">
-				<li class="item-menu <?php echo (verificarMenuAtivo("estacionamento/dashboard")) ?>">
+				<li class="item-menu <?php echo (verificarMenuAtivo(["estacionamento/dashboard"])) ?>">
 					<i class="material-symbols-outlined">dashboard</i>
 					<span>Dashboard</span>
 				</li>
@@ -17,7 +17,7 @@
 
 		<?php if (verificarPermissaoItemMenu('cadastro_veiculo')): ?>
 			<a href="index.php?url=veiculo/cadastro">
-				<li class="item-menu <?php echo (verificarMenuAtivo("veiculo/cadastro")) ?>">
+				<li class="item-menu <?php echo (verificarMenuAtivo(["veiculo/cadastro"])) ?>">
 					<i class="material-symbols-outlined">add</i>
 					<span>Cadastro de Veículo</span>
 				</li>
@@ -26,7 +26,7 @@
 
 		<?php if (verificarPermissaoItemMenu(item: 'gerenciamento')): ?>
 			<a href="index.php?url=estacionamento/gerenciar">
-				<li class="item-menu <?php echo (verificarMenuAtivo("estacionamento/gerenciar")) ?>">
+				<li class="item-menu <?php echo (verificarMenuAtivo(["estacionamento/gerenciar"])) ?>">
 					<i class="material-symbols-outlined">car_gear</i>
 					<span>Gerenciar Estacionamento</span>
 				</li>
@@ -35,7 +35,7 @@
 
 		<?php if (verificarPermissaoItemMenu('historico')): ?>
 			<a href="index.php?url=estacionamento/historico">
-				<li class="item-menu <?php echo (verificarMenuAtivo("estacionamento/historico")) ?>">
+				<li class="item-menu <?php echo (verificarMenuAtivo(["estacionamento/historico"])) ?>">
 					<i class="material-symbols-outlined">lists</i>
 					<span>Histórico</span>
 				</li>
@@ -43,8 +43,8 @@
 		<?php endif; ?>
 
 		<?php if (verificarPermissaoItemMenu('cadastro_usuario')): ?>
-			<a href="index.php?url=usuario/cadastro">
-				<li class="item-menu <?php echo (verificarMenuAtivo("usuario/cadastro")) ?>">
+			<a href="index.php?url=usuario/listar">
+				<li class="item-menu <?php echo (verificarMenuAtivo(["usuario/listar", "usuario/cadastro"])) ?>">
 					<i class="material-symbols-outlined">person_add</i>
 					<span>Cadastrar usuários</span>
 				</li>
@@ -53,7 +53,7 @@
 
 		<?php if (verificarPermissaoItemMenu('configuracoes')): ?>
 			<a href="index.php?url=estacionamento/configuracoes">
-				<li class="item-menu <?php echo (verificarMenuAtivo("estacionamento/configuracoes")) ?>">
+				<li class="item-menu <?php echo (verificarMenuAtivo(["estacionamento/configuracoes"])) ?>">
 					<i class="material-symbols-outlined">settings</i>
 					<span>Configurações</span>
 				</li>

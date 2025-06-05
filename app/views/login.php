@@ -42,6 +42,5 @@
 	</section>
 </body>
 <!-- <script src="js/script.js"></script> -->
-<script src="js/validacoes.js"></script>
-
+<script type="module" src="js/validacoes.js"></script>
 </html>

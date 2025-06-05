@@ -20,33 +20,46 @@
   <main class="main--container">
     <header class="header--conteudo">
       <div class="header--titulo">
-        <h1>Cadastro de Usuários</h1>
+        <h1><?php echo !isset($usuario) ? "Alterar" : "Cadastro"; ?></h1>
         <span class="header--subtitulo"></span>
       </div>
     </header>
 
     <div class="cadastro-veiculo--container">
-      <form action="">
+      <form
+        method="POST"
+        id="<?php echo !isset($usuario) ? "form-cadastro-usuario" : "form-editar-usuario"; ?>"
+        action="<?php echo !isset($usuario) ? "index.php?url=usuario/salvar" : "index.php?url=usuario/editar/$usuario[id]"; ?>">
         <h2>Dados do usuário</h2>
 
         <div class="grupo-input">
           <div class="input-formulario">
-            <input type="text" name="nome" required id="nome" />
+            <input
+              type="text"
+              name="nome"
+              id="nome"
+              value="<?php echo isset($usuario['nome']) ? $usuario['nome'] : ''; ?>" />
             <label for="nome">Nome</label>
-          </div>
-          <div class="input-formulario">
-            <input type="text" name="email" required id="email" />
-            <label for="email">E-mail</label>
-          </div>
-          <div class="input-formulario">
-            <input type="text" name="senha" required id="senha" />
-            <label for="senha">Senha</label>
           </div>
           <div class="input-formulario">
             <input
               type="text"
+              name="email"
+              id="email"
+              value="<?php echo isset($usuario['email']) ? $usuario['email'] : ''; ?>" />
+            <label for="email">E-mail</label>
+          </div>
+          <div class="input-formulario">
+            <input
+              type="password"
+              name="senha"
+              id="senha" />
+            <label for="senha">Senha</label>
+          </div>
+          <div class="input-formulario">
+            <input
+              type="password"
               name="confirmacao_senha"
-              required
               id="confirmacao_senha" />
             <label for="confirmacao_senha">Confirmação de senha</label>
           </div>
@@ -56,32 +69,50 @@
 
         <div class="grupo-input">
           <div class="checkbox-formulario">
-            <input type="checkbox" />
+            <input
+              type="checkbox"
+              name="checkbox_dashboard"
+              <?php echo isset($usuario['permissoes']['dashboard']) && $usuario['permissoes']['dashboard'] ? 'checked' : ''; ?> />
             <label style="font-size: 14px">Dashboard</label>
           </div>
 
           <div class="checkbox-formulario">
-            <input type="checkbox" />
+            <input
+              type="checkbox"
+              name="checkbox_cadastro_veiculo"
+              <?php echo isset($usuario['permissoes']['cadastro_veiculo']) && $usuario['permissoes']['cadastro_veiculo'] ? 'checked' : ''; ?> />
             <label style="font-size: 14px">Cadastro de veículo</label>
           </div>
 
           <div class="checkbox-formulario">
-            <input type="checkbox" />
+            <input
+              type="checkbox"
+              name="checkbox_gerenciar_estacionamento"
+              <?php echo isset($usuario['permissoes']['gerenciamento']) && $usuario['permissoes']['gerenciamento'] ? 'checked' : ''; ?> />
             <label style="font-size: 14px">Gerenciar estacionamento</label>
           </div>
 
           <div class="checkbox-formulario">
-            <input type="checkbox" />
+            <input
+              type="checkbox"
+              name="checkbox_historico"
+              <?php echo isset($usuario['permissoes']['historico']) && $usuario['permissoes']['historico'] ? 'checked' : ''; ?> />
             <label style="font-size: 14px">Histórico</label>
           </div>
 
           <div class="checkbox-formulario">
-            <input type="checkbox" />
+            <input
+              type="checkbox"
+              name="checkbox_cadastrar_usuario"
+              <?php echo isset($usuario['permissoes']['cadastro_usuario']) && $usuario['permissoes']['cadastro_usuario'] ? 'checked' : ''; ?> />
             <label style="font-size: 14px">Cadastrar usuários</label>
           </div>
 
           <div class="checkbox-formulario">
-            <input type="checkbox" />
+            <input
+              type="checkbox"
+              name="checkbox_configuracoes"
+              <?php echo isset($usuario['permissoes']['configuracoes']) && $usuario['permissoes']['configuracoes'] ? 'checked' : ''; ?> />
             <label style="font-size: 14px">Configurações</label>
           </div>
         </div>
@@ -95,5 +126,6 @@
   </main>
 </body>
 <script src="js/script.js"></script>
+<script type="module" src="js/validacoes.js"></script>
 
 </html>

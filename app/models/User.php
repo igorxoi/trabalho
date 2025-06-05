@@ -6,7 +6,7 @@ class User extends Model
 {
 	public function verificarCredenciais($email, $senha)
 	{
-		$sql = "SELECT * FROM usuarios WHERE email = :email";
+		$sql = "SELECT * FROM usuario WHERE email = :email";
 
 		$stmt = $this->db->prepare($sql);
 		$stmt->bindParam(':email', $email);

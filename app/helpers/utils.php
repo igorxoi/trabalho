@@ -15,7 +15,7 @@ function verificarPermissaoItemMenu($item)
 
 function verificarMenuAtivo($item)
 {
-  return $_GET['url'] == $item ? 'ativo' : '';
+  return in_array($_GET['url'], $item) ? 'ativo' : '';
 }
 
 function redirect($url)
@@ -28,4 +28,3 @@ function responderErro($mensagem)
 {
   echo json_encode(['status' => 'erro', 'mensagem' => $mensagem]);
 }
-
