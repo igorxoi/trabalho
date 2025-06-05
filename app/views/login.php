@@ -3,14 +3,11 @@
 
 <head>
 	<meta charset="UTF-8">
-	<title>Car Layout</title>
+	<title>Login - EstacioneAqui</title>
+	<link rel="icon" type="image/x-icon" href="./assets/logo.png">
 	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
 	<link rel="stylesheet" href="css/style.css">
-
-	<style>
-		
-	</style>
 </head>
 
 <body class="pagina-login">
@@ -26,13 +23,13 @@
 				<p>
 					Entre e descubra como é simples administrar seu estacionamento. Acompanhe entradas e saídas, calcule tarifas automaticamente e mantenha tudo sob controle com apenas alguns cliques.
 				</p>
-				<form action="index.php?url=login/autenticacao" method="POST">
+				<form action="index.php?url=login/autenticacao" id="form-login" method="POST">
 					<div class="input-formulario campo-formulario campo-formulario--espacamento">
 						<input type="text" name="email" id="email" />
 						<label for="email">E-mail</label>
 					</div>
 					<div class="input-formulario campo-formulario campo-formulario--grande">
-						<input type="text" name="senha" required id="senha" />
+						<input type="password" name="senha" id="senha" />
 						<label for="senha">Senha</label>
 					</div>
 					<input type="submit" class="botao primario" value="Login">
@@ -44,6 +41,7 @@
 		</div>
 	</section>
 </body>
-<script src="js/script.js"></script>
+<!-- <script src="js/script.js"></script> -->
+<script src="js/validacoes.js"></script>
 
 </html>
