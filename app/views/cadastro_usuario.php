@@ -20,7 +20,7 @@
   <main class="main--container">
     <header class="header--conteudo">
       <div class="header--titulo">
-        <h1><?php echo !isset($usuario) ? "Alterar" : "Cadastro"; ?></h1>
+        <h1><?php echo !isset($usuario) ? "Cadastrar usuário" : "Alterar usuário"; ?></h1>
         <span class="header--subtitulo"></span>
       </div>
     </header>
@@ -110,7 +110,7 @@
         </div>
 
         <div class="acoes-cadastrar-veiculo">
-          <button onclick="navegarPara('dashboard')">Cancelar</button>
+          <button onclick="navegarPara('listagemUsuarios')">Cancelar</button>
           <input type="submit" class="botao primario" value="Cadastrar">
         </div>
       </form>

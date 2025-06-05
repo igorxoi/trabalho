@@ -20,7 +20,7 @@
   <main class="main--container">
     <header class="header--conteudo">
       <div class="header--titulo">
-        <h1>Usuários</h1>
+        <h1>Listagem de usuários</h1>
         <span class="header--subtitulo"></span>
       </div>
     </header>

@@ -7,7 +7,7 @@ const cardsTipo = document.querySelectorAll(".opcao-tipo-veiculo");
 const inputQntVagas = document.querySelector("#qnt_vagas");
 const inputValorPrimeiraHora = document.querySelector("#valor_primeira_hora");
 const inputValorDemaisHoras = document.querySelector("#valor_demais_horas");
-const tipoVeiculo = document.querySelector("#tipo").value;
+const tipoVeiculo = document.querySelector("#tipo")?.value;
 const inputPlaca = document.querySelector("#placa");
 const inputTelefone = document.querySelector("#telefone_proprietario");
 
@@ -89,11 +89,12 @@ function definirCardAtivo(cardAtivo, idTipo) {
 
 function navegarPara(tela) {
   const navegacao = {
-    dashboard: "index.html",
-    gerenciar: "gerenciar.html",
-    cadastro: "cadastro.html",
-    configuracoes: "configuracoes.html",
-    historico: "historico.html",
+    dashboard: "index.php?url=estacionamento/dashboard",
+    gerenciar: "index.php?url=estacionamento/gerenciar",
+    cadastroVeiculo: "index.php?url=veiculo/cadastro",
+    configuracoes: "index.php?url=estacionamento/configuracoes",
+    historico: "index.php?url=estacionamento/historico",
+    listagemUsuarios: "index.php?url=usuario/listar"
   };
 
   window.location = navegacao[tela];
