@@ -600,6 +600,108 @@ input[type="checkbox"]:checked:after {
   display: block;
 }
 
+/* LOGIN */
+.pagina-login .fundo-principal {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  background: #fff;
+  overflow: hidden;
+}
+
+.pagina-login .fundo-azul {
+  position: absolute;
+  top: 0;
+  right: -30%;
+  width: 70%;
+  height: 100%;
+  background: linear-gradient(to bottom, var(--cor-primaria), #006ad1);
+  transform: skewX(-20deg);
+  transform-origin: top right;
+  z-index: 1;
+}
+
+.pagina-login .conteudo-login {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+  padding: 0 5%;
+}
+
+.pagina-login .caixa-texto {
+  max-width: 35%;
+  min-width: 30%;
+}
+
+.pagina-login .caixa-texto h4 {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--cor-primaria);
+}
+
+.pagina-login .caixa-texto h1 {
+  font-size: 3rem;
+  color: var(--cor-caixa--texto-primario);
+}
+
+.pagina-login .caixa-texto p {
+  color: var(--cor-cinza);
+  font-size: 14px;
+  margin-bottom: 30px;
+}
+
+.pagina-login .logo-img {
+  height: 50px;
+  width: 50px;
+  margin-bottom: 30px;
+}
+
+.pagina-login .caixa-texto form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.pagina-login .campo-formulario {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.pagina-login .campo-formulario--espacamento {
+  margin-bottom: 12px;
+}
+
+.pagina-login .campo-formulario--grande {
+  margin-bottom: 30px;
+}
+
+.pagina-login .imagem-carro {
+  max-width: 65%;
+  z-index: 3;
+}
+
+.pagina-login .imagem-carro img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.pagina-login input {
+  width: 100%;
+  height: 45px;
+  border-radius: 6px;
+  font-size: 14px;
+  padding: 0 10px;
+  border: 1px solid var(--cor-cinza);
+  background: transparent;
+  color: var(--cor-cinza);
+  outline: none;
+}
+
 /* RESPONSIVO */
 @-webkit-keyframes fadein {
   from {
@@ -645,6 +747,27 @@ input[type="checkbox"]:checked:after {
   }
 }
 
+@media (max-width: 1250px) {
+  .pagina-login .fundo-azul {
+    right: -60%;
+    width: 100%;
+  }
+  .pagina-login .imagem-carro {
+    display: none;
+  }
+
+  .pagina-login .caixa-texto {
+    max-width: 90%;
+    min-width: 90%;
+    border-radius: 8px;
+    background: var(--cor-branco);
+    padding: 40px 24px;
+    gap: 16px;
+    max-width: 100%;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+}
+
 @media (max-width: 680px) {
   .header--conteudo {
     height: auto;
@@ -665,5 +788,13 @@ input[type="checkbox"]:checked:after {
 
   .card--container {
     padding: unset;
+  }
+
+  .fundo-principal {
+    background: linear-gradient(
+      to bottom,
+      var(--cor-primaria),
+      #006ad1
+    ) !important;
   }
 }

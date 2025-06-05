@@ -1,17 +1,49 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
+
 <head>
 	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Login</title>
+	<title>Car Layout</title>
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+	<link rel="stylesheet" href="css/style.css">
+
+	<style>
+		
+	</style>
 </head>
-<body>
-	<div class="login-container">
-		<form action="index.php?url=login/autenticacao" method="POST">
-			<input type="text" name="email" placeholder="E-mail" required>
-			<input type="password" name="senha" placeholder="Senha" required>
-			<button type="submit">Entrar</button>
-		</form>
-	</div>
-	</body>
+
+<body class="pagina-login">
+	<section class="fundo-principal">
+		<div class="fundo-azul"></div>
+		<div class="conteudo-login">
+			<div class="caixa-texto">
+				<div>
+					<img src="./assets/logo.png" class="logo-img" alt="Logo" />
+					<h4>Bem-vindo ao</h4>
+				</div>
+				<h1>EstacioneAqui</h1>
+				<p>
+					Entre e descubra como é simples administrar seu estacionamento. Acompanhe entradas e saídas, calcule tarifas automaticamente e mantenha tudo sob controle com apenas alguns cliques.
+				</p>
+				<form action="index.php?url=login/autenticacao" method="POST">
+					<div class="input-formulario campo-formulario campo-formulario--espacamento">
+						<input type="text" name="email" id="email" />
+						<label for="email">E-mail</label>
+					</div>
+					<div class="input-formulario campo-formulario campo-formulario--grande">
+						<input type="text" name="senha" required id="senha" />
+						<label for="senha">Senha</label>
+					</div>
+					<input type="submit" class="botao primario" value="Login">
+				</form>
+			</div>
+			<div class="imagem-carro">
+				<img src="./assets/carro.png" alt="Imagem do carro" />
+			</div>
+		</div>
+	</section>
+</body>
+<script src="js/script.js"></script>
+
 </html>
