@@ -6,14 +6,12 @@
 		<h1 class="nome-estaciona-aqui">Estaciona<b>A</b>qui!</h1>
 	</div>
 	<ul class="menu">
-		<?php if (verificarPermissaoItemMenu('dashboard')): ?>
-			<a href="index.php?url=estacionamento/dashboard">
-				<li class="item-menu <?php echo (verificarMenuAtivo(["estacionamento/dashboard"])) ?>">
-					<i class="material-symbols-outlined">dashboard</i>
-					<span>Dashboard</span>
-				</li>
-			</a>
-		<?php endif; ?>
+		<a href="index.php?url=estacionamento/dashboard">
+			<li class="item-menu <?php echo (verificarMenuAtivo(["estacionamento/dashboard"])) ?>">
+				<i class="material-symbols-outlined">dashboard</i>
+				<span>Dashboard</span>
+			</li>
+		</a>
 
 		<?php if (verificarPermissaoItemMenu('cadastro_veiculo')): ?>
 			<a href="index.php?url=veiculo/cadastro">

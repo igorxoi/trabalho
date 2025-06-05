@@ -30,6 +30,6 @@ class LoginController extends Controller
 			'permissoes' => $permissoes
 		];
 
-		redirect("estacionamento/gerenciar");
+		redirect("estacionamento/dashboard");
 	}
 }

@@ -71,14 +71,6 @@
           <div class="checkbox-formulario">
             <input
               type="checkbox"
-              name="checkbox_dashboard"
-              <?php echo isset($usuario['permissoes']['dashboard']) && $usuario['permissoes']['dashboard'] ? 'checked' : ''; ?> />
-            <label style="font-size: 14px">Dashboard</label>
-          </div>
-
-          <div class="checkbox-formulario">
-            <input
-              type="checkbox"
               name="checkbox_cadastro_veiculo"
               <?php echo isset($usuario['permissoes']['cadastro_veiculo']) && $usuario['permissoes']['cadastro_veiculo'] ? 'checked' : ''; ?> />
             <label style="font-size: 14px">Cadastro de veículo</label>
