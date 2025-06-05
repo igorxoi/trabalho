@@ -41,6 +41,15 @@
 		</div>
 	</section>
 </body>
-<!-- <script src="js/script.js"></script> -->
 <script type="module" src="js/validacoes.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const erro = urlParams.get("erro");
+
+    if (erro === "credenciais") {
+      alert("Login ou senha inválidos!");
+    }
+  });
+</script>
 </html>

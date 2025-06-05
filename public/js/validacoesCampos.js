@@ -56,8 +56,8 @@ export const formularios = {
   "form-login": [
     {
       id: "email",
-      validacao: (val) => val.length >= 10,
-      mensagem: "O e-mail deve ter pelo menos 10 caracteres.",
+      validacao: (val) => val.length !== "",
+      mensagem: "O e-mail é obrigatório.",
     },
     {
       id: "senha",

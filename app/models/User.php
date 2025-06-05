@@ -23,7 +23,7 @@ class User extends Model
 
 	public function buscarPermissoes($usuarioId)
 	{
-		$stmt = $this->db->prepare("SELECT permissoes FROM usuarios WHERE id = ?");
+		$stmt = $this->db->prepare("SELECT permissoes FROM usuario WHERE id = ?");
 		$stmt->execute([$usuarioId]);
 		return $stmt->fetchAll(PDO::FETCH_COLUMN);
 	}

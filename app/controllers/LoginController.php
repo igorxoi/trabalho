@@ -19,7 +19,7 @@ class LoginController extends Controller
 		$usuario = $userModel->verificarCredenciais($email, $senha);
 
 		if (!$usuario) {
-			return responderErro('Credenciais inválidas.');
+			redirect("login/index&erro=credenciais");
 		}
 
 		$permissoes = $userModel->buscarPermissoes($usuario['id']);
