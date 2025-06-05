@@ -1,6 +1,7 @@
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", () => {  
   const formVeiculo = document.getElementById("form-veiculo");
   const formConfiguracoes = document.getElementById("form-configuracoes");
+  const formLogin = document.getElementById("form-login");
 
   let form;
   let campos;
@@ -23,6 +24,12 @@ document.addEventListener("DOMContentLoaded", () => {
       { id: "valor_primeira_hora", validacao: (val) => val !== "R$ 0,00" },
       { id: "valor_demais_horas", validacao: (val) => val !== "R$ 0,00" },
     ];
+  } else if (formLogin) {
+    form = formLogin;
+    campos = [
+      { id: "email", validacao: (val) => val.length >= 10 },
+      { id: "senha", validacao: (val) => val !== "" },
+    ];
   }
 
   if (!form) return;
@@ -33,7 +40,7 @@ document.addEventListener("DOMContentLoaded", () => {
     input.classList.toggle("preenchido", input.value.trim() !== "");
   }
 
-  function configurarEventosInput(input) {
+  function configurarEventosInput(input) {    
     input.addEventListener("input", () => {
       atualizarPreenchido(input);
       input.classList.remove("input-erro");
@@ -55,7 +62,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   form.addEventListener("submit", (event) => {
     let formularioValido = true;
-
+    console.log(formularioValido);
+    
     campos.forEach(({ id, validacao }) => {
       const valor = getInputValue(id);
       const valido = validacao(valor);
